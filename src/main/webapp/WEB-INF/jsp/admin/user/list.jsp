@@ -55,8 +55,14 @@
                   	<a href="/admin/user/edit?id=${user.userId}" class="btn btn-xs btn-warning">编辑</a>
                   </shiro:hasPermission>
                   <shiro:hasPermission name="user:edit">
-                  	<button onclick="actionBtn('${user.userId}')" class="btn btn-xs btn-danger">删除</button>
+                  	<button onclick="actionBtn('${user.userId}','delete',this)" class="btn btn-xs btn-danger">删除</button>
                   </shiro:hasPermission>
+                    <button onclick="actionBtn('${user.userId}','blacklist',this)" class="btn btn-xs btn-danger">
+                      <c:choose>
+                        <c:when test="${user.isBlock}"> 取消拉黑</c:when>
+                        <c:otherwise> 拉黑</c:otherwise>
+                      </c:choose>
+                    </button>
               </td>
             </tr>
 			</c:forEach>
@@ -78,20 +84,29 @@
   	 	paginate(count,limit,p,url);
   	});
   	
-  	// 删除用户
-  	function actionBtn(id){
-  		if(confirm("确定要删除这个用户吗？他发布的话题、评论以及收藏都会一起删除！")){
-  			$.get("/admin/user/delete?id=" + id,function(data){
-  				if(data.success === true){
-  					toast(data.error, "success");
-  					setTimeout(function(){
-  						window.location.reload();
-  					},700);
-  				}else{
-  					toast(data.error);
-  				}
-  			})
-  		}
+
+  	function actionBtn(userid, action, self){
+      var msg, url;
+      var tip = $(self).text().replace(/[\r\n]/g, '').trim();
+      if (action === 'delete') {
+        url = '/admin/user/delete?id=' + userid;
+        msg = '确定' + tip + '这个用户吗？';
+      } else if (action === 'blacklist') {
+        url = '/admin/user/blacklist?id=' + userid;
+        msg = '确定' + tip + '这个用户吗？';
+      }
+      if (confirm(msg)) {
+        $.get(url, function (data) {
+          if (data.success === true) {
+            toast(data.error, "success");
+            setTimeout(function () {
+              window.location.reload();
+            }, 700);
+          } else {
+            toast(data.error);
+          }
+        })
+      }
  	}
   </script>
 </div>

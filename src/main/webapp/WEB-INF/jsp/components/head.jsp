@@ -23,15 +23,7 @@
      style="border-radius: 0; margin-bottom: 10px;">
     <div class="container">
         <div class="navbar-header">
-            <%--<button type="button" class="navbar-toggle collapsed"--%>
-                    <%--data-toggle="collapse" data-target="#navbar" aria-expanded="false"--%>
-                    <%--aria-controls="navbar">--%>
-                <%--<span class="sr-only">Toggle navigation</span> <span--%>
-                    <%--class="icon-bar"></span> <span class="icon-bar"></span> <span--%>
-                    <%--class="icon-bar"></span>--%>
-            <%--</button>--%>
-            <a class="navbar-brand" style="font-weight: 700; font-size: 27px;"
-               href="/">Roothub</a>
+            <a class="navbar-brand" style="font-weight: 700; font-size: 27px;" href="/">Roothub</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse header-navbar">
             <form class="navbar-form navbar-left hidden-xs hidden-sm"
@@ -39,40 +31,43 @@
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" name="s" value="" id="sea"
                            style="width: 270px;" placeholder="回车搜索">
-                    <!-- <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span> -->
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li class="hidden-xs" id="shouye"><a href="/">首页</a></li>
-                <%--<li id="nodes"><a href="/nodes">节点</a></li>--%>
-                <li id="biaoqian"><a href="/tags">标签</a></li>
-                <li id="loginli" style="display:none"><a href="/login">登录</a></li>
-                <li id="zhuceli" style="display:none"><a href="/register">注册</a></li>
-                <li class="hidden-md hidden-lg"><a href="/topic/create">发布话题</a></li>
-                <li id="loginuser" style="display:none"><a href="/user/public"><span class="badge"
-                                                                                     id="badge"></span></a></li>
-                <li id="shezhili" style="display:none"><a href="/user/settings/profile">设置</a></li>
-                <li id="tuichuli" style="display:none"><a
-                        href="javascript:if(confirm('确定要登出Roothub吗？'))location.href='/logout'">退出</a></li>
+                <li class="hidden-xs" id="shouye">
+                    <a href="/">首页</a>
+                </li>
+                <li id="biaoqian">
+                    <a href="/tags">标签</a>
+                </li>
+                <li id="loginli" style="display:none">
+                    <a href="/login">登录</a>
+                </li>
+                <li id="zhuceli" style="display:none">
+                    <a href="/register">注册</a>
+                </li>
+                <li class="hidden-md hidden-lg">
+                    <a href="/topic/create">发布话题</a>
+                </li>
+                <li id="loginuser" style="display:none">
+                    <a href="/user/public" id="current-loger"><span class="badge" id="badge"></span></a>
+                </li>
+                <li id="shezhili" style="display:none">
+                    <a href="/user/settings/profile">设置</a>
+                </li>
+                <li id="tuichuli" style="display:none">
+                    <a href="javascript:if(confirm('确定要登出Roothub吗？'))location.href='/logout'">退出</a>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="container" style="padding: 0 25px;">
-    <%--<form class="hidden-lg hidden-md" style="margin: 0 -10px;"--%>
-          <%--role="search" action="/search" method="get">--%>
-        <%--<div class="form-group has-feedback" style="margin-bottom: 10px;">--%>
-            <%--<input type="text" class="form-control" name="q" value=""--%>
-                   <%--placeholder="回车搜索">--%>
-            <%--<!-- <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span> -->--%>
-        <%--</div>--%>
-    <%--</form>--%>
 
     <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
     <script src="/resources/js/jquery.js"></script>
     <!-- 引入 Bootstrap -->
     <script src="/resources/js/bootstrap.min.js"></script>
-    <!-- <script src="/resources/js/head.js"></script> -->
     <script type="text/javascript">
         $(function () {
             $.ajax({
@@ -82,10 +77,10 @@
                 success: function (data) {
                     // console.log(JSON.stringify(data));
                     if (data.success != null && data.success == true) {
-
                         $("#loginuser").show();
                         $("#loginuser a").text(data.user);
                         $("#loginuser a").attr("href", "/user/" + data.user);
+                        
                         $("#shezhili").show();
                         $("#tuichuli").show();
                     }

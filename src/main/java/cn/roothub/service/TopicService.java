@@ -1,16 +1,19 @@
 package cn.roothub.service;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import cn.roothub.dto.PageDataBody;
 import cn.roothub.dto.TopicExecution;
+import cn.roothub.entity.Tag;
 import cn.roothub.entity.Topic;
 import cn.roothub.entity.User;
-import cn.roothub.entity.Tag;
+
+import java.util.List;
 
 public interface TopicService {
+	/**
+	 * 查询所有合理话题，不包括删除的和被屏蔽的
+	 */
+	PageDataBody<Topic> pageByValid(Integer pageNumber, Integer pageSize);
+
 
 	/**
 	 * 根据节点和sectionName查询话题
@@ -87,6 +90,11 @@ public interface TopicService {
 	 * @return
 	 */
 	Topic findByTopicId(Integer topicId);
+
+	/**
+	 * 根据作者昵称查询话题
+	 */
+	List<Topic> findByAuthor(String author);
 	
 	/**
 	 * 查询当前作者的其他话题
@@ -131,7 +139,18 @@ public interface TopicService {
 	 * @return
 	 */
 	PageDataBody<Topic> pageByAuthor(Integer pageNumber, Integer pageSize, String author);
-	
+
+
+    /**
+     * 根据作者昵称分页查询所有没有被屏蔽话题
+     */
+    PageDataBody<Topic> pageByAuthorAndValid(Integer pageNumber, Integer pageSize, String author);
+
+    /**
+     * 根据作者昵称分页查询所有被屏蔽话题
+     */
+    PageDataBody<Topic> pageByAuthorAndInvalid(Integer pageNumber, Integer pageSize, String author);
+
 	/**
 	 * 查询所有话题
 	 * @return
@@ -142,7 +161,7 @@ public interface TopicService {
 	 * 根据ID删除话题
 	 * @param id
 	 */
-	void deleteByTopicId(Integer topicId);
+	boolean deleteByTopicId(Integer topicId);
 	
 	/**
 	 * 根据作者删除话题

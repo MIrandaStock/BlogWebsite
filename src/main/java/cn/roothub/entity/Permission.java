@@ -7,73 +7,73 @@ import java.util.Date;
  * @author miansen.wang
  * @date 2019年2月26日 下午12:47:26
  */
-public class Permission implements Serializable{
-	
-	private static final long serialVersionUID = 6163933397000219988L;
+public class Permission implements Serializable {
 
-	private Integer permissionId;
-	
-	private String permissionName;
-	
-	private String permissionValue;
-	
-	private Integer pid;
-	
-	private Date createDate;
-	
-	private Date updateDate;
+    private static final long serialVersionUID = 6163933397000219988L;
 
-	public Integer getPermissionId() {
-		return permissionId;
-	}
+    private Integer permissionId;
 
-	public void setPermissionId(Integer permissionId) {
-		this.permissionId = permissionId;
-	}
+    private String permissionName;
 
-	public String getPermissionName() {
-		return permissionName;
-	}
+    private String permissionValue;
 
-	public void setPermissionName(String permissionName) {
-		this.permissionName = permissionName;
-	}
+    private Integer pid;
 
-	public String getPermissionValue() {
-		return permissionValue;
-	}
+    private Date createDate;
 
-	public void setPermissionValue(String permissionValue) {
-		this.permissionValue = permissionValue;
-	}
+    private Date updateDate;
 
-	public Integer getPid() {
-		return pid;
-	}
+    public Integer getPermissionId() {
+        return permissionId;
+    }
 
-	public void setPid(Integer pid) {
-		this.pid = pid;
-	}
+    public void setPermissionId(Integer permissionId) {
+        this.permissionId = permissionId;
+    }
 
-	public Date getCreateDate() {
-		return createDate;
-	}
+    public String getPermissionName() {
+        return permissionName;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName;
+    }
 
-	public Date getUpdateDate() {
-		return updateDate;
-	}
+    public String getPermissionValue() {
+        return permissionValue;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public void setPermissionValue(String permissionValue) {
+        this.permissionValue = permissionValue;
+    }
 
-	@Override
-	public String toString() {
-		return "Permission [permissionId=" + permissionId + ", permissionName=" + permissionName + ", permissionValue="
-				+ permissionValue + ", pid=" + pid + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
-	}
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Permission [permissionId=" + permissionId + ", permissionName=" + permissionName + ", permissionValue="
+                + permissionValue + ", pid=" + pid + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+    }
 }

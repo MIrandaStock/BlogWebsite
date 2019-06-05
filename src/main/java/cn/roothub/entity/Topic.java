@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * 话题实体
  * Table: root_topic
+ *
  * @author sen
  * 2018年5月5日
  * 下午9:19:57
@@ -12,364 +13,364 @@ import java.util.Date;
  */
 public class Topic {
 
-	/**
-	 * 话题标识
-	 */
-	private Integer topicId;
-	
-	/**
-	 * 父版块标识
-	 */
-	private String ptab;
-	
-	/**
-	 * 版块标识
-	 */
-	private String tab;
-	
-	/**
-	 * 话题标题
-	 */
-	private String title;
-	
-	/**
-	 * 话题内容标签
-	 */
-	private String tag;
-	
-	/**
-	 * 话题内容
-	 */
-	private String content;
-	
-	/**
-	 * 摘录
-	 */
-	private String excerpt;
-	
-	/**
-	 * 创建时间
-	 */
-	private Date createDate;
-	
-	/**
-	 * 更新时间
-	 */
-	private Date updateDate;
-	
-	/**
-	 * 最后回复话题时间，用于排序
-	 */
-	private Date lastReplyTime;
-	
-	/**
-	 * 最后回复话题的用户id
-	 */
-	private String lastReplyAuthor;
-	
-	/**
-	 * 浏览量
-	 */
-	private Integer viewCount;
-	
-	/**
-	 * 话题作者id
-	 */
-	private String author;
-	
-	/**
-	 * 1置顶 0默认
-	 */
-	private Boolean top;
-	
-	/**
-	 * 1精华 0默认
-	 */
-	private Boolean good;
-	
-	/**
-	 * 1显示 0不显示
-	 */
-	private Boolean showStatus;
-	
-	/**
-	 * 回复数量
-	 */
-	private Integer replyCount;
-	
-	/**
-	 * 1删除 0默认
-	 */
-	private Boolean isDelete;
-	
-	/**
-	 * 话题内容标签是否被统计过 1是 0否默认
-	 */
-	private Boolean tagIsCount;
-	
-	/**
-	 * 点赞
-	 */
-	private Integer postGoodCount;
-	
-	/**
-	 * 踩数
-	 */
-	private Integer postBadCount;
-	
-	/**
-	 * 话题状态 1000:有效 1100:无效 1200:未生效
-	 */
-	private String statusCd;
-	
-	/**
-	 * 所属节点
-	 */
-	private String nodeSlug;
-	
-	/**
-	 * 节点名称
-	 */
-	private String nodeTitle;
-	
-	/**
-	 * 备注
-	 */
-	private String remark;
-	
-	/**
-	 * 话题作者头像
-	 */
-	private String avatar;
-	
-	private String url;
+    /**
+     * 话题标识
+     */
+    private Integer topicId;
 
-	public String getAvatar() {
-		return avatar;
-	}
+    /**
+     * 父版块标识
+     */
+    private String ptab;
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
+    /**
+     * 版块标识
+     */
+    private String tab;
 
-	public Integer getTopicId() {
-		return topicId;
-	}
+    /**
+     * 话题标题
+     */
+    private String title;
 
-	public void setTopicId(Integer topicId) {
-		this.topicId = topicId;
-	}
+    /**
+     * 话题内容标签
+     */
+    private String tag;
 
-	public String getTab() {
-		return tab;
-	}
+    /**
+     * 话题内容
+     */
+    private String content;
 
-	public void setTab(String tab) {
-		this.tab = tab;
-	}
+    /**
+     * 摘录
+     */
+    private String excerpt;
 
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * 创建时间
+     */
+    private Date createDate;
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    /**
+     * 更新时间
+     */
+    private Date updateDate;
 
-	public String getTag() {
-		return tag;
-	}
+    /**
+     * 最后回复话题时间，用于排序
+     */
+    private Date lastReplyTime;
 
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
+    /**
+     * 最后回复话题的用户id
+     */
+    private String lastReplyAuthor;
 
-	public String getContent() {
-		return content;
-	}
+    /**
+     * 浏览量
+     */
+    private Integer viewCount;
 
-	public void setContent(String content) {
-		this.content = content;
-	}
-	
-	public String getExcerpt() {
-		return excerpt;
-	}
+    /**
+     * 话题作者id
+     */
+    private String author;
 
-	public void setExcerpt(String excerpt) {
-		this.excerpt = excerpt;
-	}
+    /**
+     * 1置顶 0默认
+     */
+    private Boolean top;
 
-	public Date getCreateDate() {
-		return createDate;
-	}
+    /**
+     * 1精华 0默认
+     */
+    private Boolean good;
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    /**
+     * 1显示 0不显示
+     */
+    private Boolean showStatus;
 
-	public Date getUpdateDate() {
-		return updateDate;
-	}
+    /**
+     * 回复数量
+     */
+    private Integer replyCount;
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    /**
+     * 1删除 0默认
+     */
+    private Boolean isDelete;
 
-	public Date getLastReplyTime() {
-		return lastReplyTime;
-	}
+    /**
+     * 话题内容标签是否被统计过 1是 0否默认
+     */
+    private Boolean tagIsCount;
 
-	public void setLastReplyTime(Date lastReplyTime) {
-		this.lastReplyTime = lastReplyTime;
-	}
+    /**
+     * 点赞
+     */
+    private Integer postGoodCount;
 
-	public String getLastReplyAuthor() {
-		return lastReplyAuthor;
-	}
+    /**
+     * 踩数
+     */
+    private Integer postBadCount;
 
-	public void setLastReplyAuthor(String lastReplyAuthor) {
-		this.lastReplyAuthor = lastReplyAuthor;
-	}
+    /**
+     * 话题状态 1000:有效 1100:无效 1200:未生效
+     */
+    private String statusCd;
 
-	public Integer getViewCount() {
-		return viewCount;
-	}
+    /**
+     * 所属节点
+     */
+    private String nodeSlug;
 
-	public void setViewCount(Integer viewCount) {
-		this.viewCount = viewCount;
-	}
+    /**
+     * 节点名称
+     */
+    private String nodeTitle;
 
-	public String getAuthor() {
-		return author;
-	}
+    /**
+     * 备注
+     */
+    private String remark;
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    /**
+     * 话题作者头像
+     */
+    private String avatar;
 
-	public Boolean getTop() {
-		return top;
-	}
+    private String url;
 
-	public void setTop(Boolean top) {
-		this.top = top;
-	}
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public Boolean getGood() {
-		return good;
-	}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-	public void setGood(Boolean good) {
-		this.good = good;
-	}
+    public Integer getTopicId() {
+        return topicId;
+    }
 
-	public Boolean getShowStatus() {
-		return showStatus;
-	}
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
+    }
 
-	public void setShowStatus(Boolean showStatus) {
-		this.showStatus = showStatus;
-	}
+    public String getTab() {
+        return tab;
+    }
 
-	public Integer getReplyCount() {
-		return replyCount;
-	}
+    public void setTab(String tab) {
+        this.tab = tab;
+    }
 
-	public void setReplyCount(Integer replyCount) {
-		this.replyCount = replyCount;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public Boolean getIsDelete() {
-		return isDelete;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
+    public String getTag() {
+        return tag;
+    }
 
-	public Boolean getTagIsCount() {
-		return tagIsCount;
-	}
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
-	public void setTagIsCount(Boolean tagIsCount) {
-		this.tagIsCount = tagIsCount;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public Integer getPostGoodCount() {
-		return postGoodCount;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setPostGoodCount(Integer postGoodCount) {
-		this.postGoodCount = postGoodCount;
-	}
+    public String getExcerpt() {
+        return excerpt;
+    }
 
-	public Integer getPostBadCount() {
-		return postBadCount;
-	}
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
+    }
 
-	public void setPostBadCount(Integer postBadCount) {
-		this.postBadCount = postBadCount;
-	}
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-	public String getStatusCd() {
-		return statusCd;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public void setStatusCd(String statusCd) {
-		this.statusCd = statusCd;
-	}
+    public Date getUpdateDate() {
+        return updateDate;
+    }
 
-	public String getNodeSlug() {
-		return nodeSlug;
-	}
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public void setNodeSlug(String nodeSlug) {
-		this.nodeSlug = nodeSlug;
-	}
+    public Date getLastReplyTime() {
+        return lastReplyTime;
+    }
 
-	public String getNodeTitle() {
-		return nodeTitle;
-	}
+    public void setLastReplyTime(Date lastReplyTime) {
+        this.lastReplyTime = lastReplyTime;
+    }
 
-	public void setNodeTitle(String nodeTitle) {
-		this.nodeTitle = nodeTitle;
-	}
+    public String getLastReplyAuthor() {
+        return lastReplyAuthor;
+    }
 
-	public String getRemark() {
-		return remark;
-	}
+    public void setLastReplyAuthor(String lastReplyAuthor) {
+        this.lastReplyAuthor = lastReplyAuthor;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public Integer getViewCount() {
+        return viewCount;
+    }
 
-	public String getPtab() {
-		return ptab;
-	}
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
 
-	public void setPtab(String ptab) {
-		this.ptab = ptab;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public Boolean getTop() {
+        return top;
+    }
 
-	@Override
-	public String toString() {
-		return "Topic [topicId=" + topicId + ", ptab=" + ptab + ", tab=" + tab + ", title=" + title + ", tag=" + tag
-				+ ", content=" + content + ", excerpt=" + excerpt + ", createDate=" + createDate + ", updateDate="
-				+ updateDate + ", lastReplyTime=" + lastReplyTime + ", lastReplyAuthor=" + lastReplyAuthor
-				+ ", viewCount=" + viewCount + ", author=" + author + ", top=" + top + ", good=" + good
-				+ ", showStatus=" + showStatus + ", replyCount=" + replyCount + ", isDelete=" + isDelete
-				+ ", tagIsCount=" + tagIsCount + ", postGoodCount=" + postGoodCount + ", postBadCount=" + postBadCount
-				+ ", statusCd=" + statusCd + ", nodeSlug=" + nodeSlug + ", nodeTitle=" + nodeTitle + ", remark="
-				+ remark + ", avatar=" + avatar + ", url=" + url + "]";
-	}
-	
+    public void setTop(Boolean top) {
+        this.top = top;
+    }
+
+    public Boolean getGood() {
+        return good;
+    }
+
+    public void setGood(Boolean good) {
+        this.good = good;
+    }
+
+    public Boolean getShowStatus() {
+        return showStatus;
+    }
+
+    public void setShowStatus(Boolean showStatus) {
+        this.showStatus = showStatus;
+    }
+
+    public Integer getReplyCount() {
+        return replyCount;
+    }
+
+    public void setReplyCount(Integer replyCount) {
+        this.replyCount = replyCount;
+    }
+
+    public Boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public Boolean getTagIsCount() {
+        return tagIsCount;
+    }
+
+    public void setTagIsCount(Boolean tagIsCount) {
+        this.tagIsCount = tagIsCount;
+    }
+
+    public Integer getPostGoodCount() {
+        return postGoodCount;
+    }
+
+    public void setPostGoodCount(Integer postGoodCount) {
+        this.postGoodCount = postGoodCount;
+    }
+
+    public Integer getPostBadCount() {
+        return postBadCount;
+    }
+
+    public void setPostBadCount(Integer postBadCount) {
+        this.postBadCount = postBadCount;
+    }
+
+    public String getStatusCd() {
+        return statusCd;
+    }
+
+    public void setStatusCd(String statusCd) {
+        this.statusCd = statusCd;
+    }
+
+    public String getNodeSlug() {
+        return nodeSlug;
+    }
+
+    public void setNodeSlug(String nodeSlug) {
+        this.nodeSlug = nodeSlug;
+    }
+
+    public String getNodeTitle() {
+        return nodeTitle;
+    }
+
+    public void setNodeTitle(String nodeTitle) {
+        this.nodeTitle = nodeTitle;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getPtab() {
+        return ptab;
+    }
+
+    public void setPtab(String ptab) {
+        this.ptab = ptab;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "Topic [topicId=" + topicId + ", ptab=" + ptab + ", tab=" + tab + ", title=" + title + ", tag=" + tag
+                + ", content=" + content + ", excerpt=" + excerpt + ", createDate=" + createDate + ", updateDate="
+                + updateDate + ", lastReplyTime=" + lastReplyTime + ", lastReplyAuthor=" + lastReplyAuthor
+                + ", viewCount=" + viewCount + ", author=" + author + ", top=" + top + ", good=" + good
+                + ", showStatus=" + showStatus + ", replyCount=" + replyCount + ", isDelete=" + isDelete
+                + ", tagIsCount=" + tagIsCount + ", postGoodCount=" + postGoodCount + ", postBadCount=" + postBadCount
+                + ", statusCd=" + statusCd + ", nodeSlug=" + nodeSlug + ", nodeTitle=" + nodeTitle + ", remark="
+                + remark + ", avatar=" + avatar + ", url=" + url + "]";
+    }
+
 }

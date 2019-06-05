@@ -25,8 +25,7 @@
                     <form id="form">
                         <div class="form-group">
                             <label for="title">标题</label>
-                            <input type="text" class="form-control" id="title" name="title"
-                                   placeholder="请输入话题标题，如果标题能够表达完整内容，则正文可以为空">
+                            <input type="text" class="form-control" id="title" name="title" placeholder="请输入话题标题，如果标题能够表达完整内容，则正文可以为空">
                         </div>
                         <div class="form-group">
                             <label for="commentId">内容</label>
@@ -35,16 +34,6 @@
                                     href="javascript:cancelReply();">取消</a></p>
                             <div id="editor" style="margin-bottom: 10px;"></div>
                         </div>
-                        <%-- <div class="form-group">
-                          <label for="tab">板块</label>
-                          <select id="tab" class="form-control" name="tab" onchange="getNode()">
-                           <c:forEach var="item" items="${tabList}" varStatus="status">
-                           <c:if test="${item.tabName != 'all' && item.tabName != 'member'}">
-                           <option value="${item.tabName}">${item.tabDesc}</option>
-                         </c:if>
-                       </c:forEach>
-                     </select>
-                   </div> --%>
                         <c:if test="${fn:length(node) == 0}">
                             <div class="form-group">
                                 <label for="node">节点</label>
@@ -162,7 +151,7 @@
                     success: function (data) {
                         alert("保存话题成功！");
                         //console.log(JSON.stringify(data));
-                        if (data.success != null && data.success == true) {
+                        if (data.success != null && data.success === true) {
                             window.location.href = "/" ;
                         } else {
                             alert(data.error);

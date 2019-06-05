@@ -1,12 +1,11 @@
 package cn.roothub.dao;
 
-import java.util.List;
-import java.util.Map;
-
+import cn.roothub.entity.Reply;
+import cn.roothub.entity.ReplyAndTopicByName;
 import org.apache.ibatis.annotations.Param;
 
-import cn.roothub.entity.ReplyAndTopicByName;
-import cn.roothub.entity.Reply;
+import java.util.List;
+import java.util.Map;
 
 public interface ReplyDao {
 
@@ -41,11 +40,11 @@ public interface ReplyDao {
 	Reply selectByReplyId(@Param("replyId") Integer replyId);
 	
 	/**
-	 * 根据话题ID查询评论
+	 * 根据话题ID查询所有评论
 	 * @param topicId
 	 * @return
 	 */
-	List<Reply> selectByTopicId(@Param("topicId") Integer topicId);
+	List<Reply> selectAllByTopicId(@Param("topicId") Integer topicId);
 	
 	/**
 	 * 根据话题ID分页查询评论
@@ -124,7 +123,7 @@ public interface ReplyDao {
 	int countByUserId(@Param("userId") Integer userId);
 	
 	/**
-	 * 根据用户昵称统计评论数
+	 * 根据用户昵称统计评论数,刨去被屏蔽的
 	 * @param userId
 	 * @return
 	 */

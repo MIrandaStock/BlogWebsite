@@ -1,33 +1,25 @@
 package cn.roothub.web.api;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import cn.roothub.config.SiteConfig;
+import cn.roothub.dto.PageDataBody;
+import cn.roothub.dto.Result;
+import cn.roothub.entity.ReplyAndTopicByName;
+import cn.roothub.entity.Top100;
+import cn.roothub.entity.Topic;
+import cn.roothub.entity.User;
+import cn.roothub.exception.ApiAssert;
+import cn.roothub.service.*;
+import cn.roothub.web.front.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.roothub.config.SiteConfig;
-import cn.roothub.dto.PageDataBody;
-import cn.roothub.dto.Result;
-import cn.roothub.entity.ReplyAndTopicByName;
-import cn.roothub.entity.Topic;
-import cn.roothub.entity.User;
-import cn.roothub.exception.ApiAssert;
-import cn.roothub.entity.Top100;
-import cn.roothub.service.CollectService;
-import cn.roothub.service.FollowService;
-import cn.roothub.service.NoticeService;
-import cn.roothub.service.ReplyService;
-import cn.roothub.service.TopicService;
-import cn.roothub.service.UserService;
-import cn.roothub.service.VisitService;
-import cn.roothub.web.front.BaseController;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -65,26 +57,49 @@ public class UserApiController extends BaseController{
 	@RequestMapping(value = "/api/user/collect",method = RequestMethod.GET)
 	private Result<PageDataBody> collectList(@RequestParam(value = "name",defaultValue = "1") String name,@RequestParam(value = "p",defaultValue = "1") Integer p){
 		User user = userService.findByName(name);
-		/*if(user == null) {
-			return new Result<PageDataBody>(true, "用户不存在");
-		}*/
 		ApiAssert.notNull(user, "用户不存在");
-		PageDataBody<Topic> page = collectDaoService.page(p, 20, user.getUserId());
+		PageDataBody<Topic> page = collectDaoService.page(p, 10, user.getUserId());
 		return new Result<PageDataBody>(true, page);
 	}
 	
 	/**
-	 * 用户的主题
+	 * 用户的主题,未被屏蔽的
 	 * @param name
 	 * @param p
 	 * @return
 	 */
 	@RequestMapping(value = "/api/user/topic",method = RequestMethod.GET)
 	private Result<PageDataBody> topicList(@RequestParam(value = "name",defaultValue = "1") String name,@RequestParam(value = "p",defaultValue = "1") Integer p){
-		PageDataBody<Topic> page = topicService.pageByAuthor(p, 20, name);
-		return new Result<PageDataBody>(true, page);
+		PageDataBody<Topic> page = topicService.pageByAuthorAndValid(p, 10, name);
+		return new Result<>(true, page);
 	}
-	
+
+    /**
+     * 用户被屏蔽的主题
+     */
+    @RequestMapping(value = "/api/user/topic/shield")
+    private Result<PageDataBody> topicListInvalid(@RequestParam(value = "name",defaultValue = "1") String name,@RequestParam(value = "p",defaultValue = "1") Integer p){
+        PageDataBody<Topic> page = topicService.pageByAuthorAndInvalid(p, 10, name);
+        return new Result<>(true, page);
+    }
+
+	/**
+	 * 删除话题
+	 */
+	@RequestMapping(value="/api/user/deleteTopic",method = RequestMethod.GET)
+	private Result<Boolean> deleteTopic(@RequestParam(value = "topicID") Integer topicID){
+		Topic topic=topicService.findById(topicID);
+		boolean flag=false;
+		if (topic.getShowStatus()){
+			if (topicService.deleteByTopicId(topicID) && replyService.deleteByTopicId(topicID)){
+				flag=true;
+			}
+		}
+		return new Result<>(true,flag );
+	}
+
+
+
 	/**
 	 * 用户的评论
 	 * @param name
@@ -93,8 +108,8 @@ public class UserApiController extends BaseController{
 	 */
 	@RequestMapping(value = "/api/user/reply",method = RequestMethod.GET)
 	private Result<PageDataBody> replyList(@RequestParam(value = "name",defaultValue = "1") String name,@RequestParam(value = "p",defaultValue = "1") Integer p){
-		PageDataBody<ReplyAndTopicByName> page = replyService.findAllByNameAndTopic(name, p, 20);
-		return new Result<PageDataBody>(true, page);
+		PageDataBody<ReplyAndTopicByName> page = replyService.findAllByNameAndTopic(name, p, 10);
+		return new Result<>(true, page);
 	}
 	
 	/**
@@ -105,8 +120,8 @@ public class UserApiController extends BaseController{
 	 */
 	@RequestMapping(value = "/api/user/follow/topic",method = RequestMethod.GET)
 	private Result<PageDataBody> followList(@RequestParam(value = "uid",defaultValue = "-1") Integer uid,@RequestParam(value = "p",defaultValue = "1") Integer p){
-		PageDataBody<Topic> page = followService.pageTopic(p, 20, uid);
-		return new Result<PageDataBody>(true, page);
+		PageDataBody<Topic> page = followService.pageTopic(p, 12, uid);
+		return new Result<>(true, page);
 	}
 	
 	/**
@@ -129,7 +144,7 @@ public class UserApiController extends BaseController{
 	 */
 	@RequestMapping(value = "/api/user/topic/qna",method = RequestMethod.GET)
 	private  Result<PageDataBody> qnaTopicList(@RequestParam(value = "name",defaultValue = "-1") String name,@RequestParam(value = "p",defaultValue = "1") Integer p){
-		PageDataBody<Topic> page = topicService.pageAllByPtabAndAuthor(p, 20, "qna", name);
+		PageDataBody<Topic> page = topicService.pageAllByPtabAndAuthor(p, 10, "qna", name);
 		return new Result<PageDataBody>(true, page);
 	}
 	

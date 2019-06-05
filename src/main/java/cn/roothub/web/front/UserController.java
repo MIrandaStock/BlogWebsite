@@ -1,25 +1,5 @@
 package cn.roothub.web.front;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.Date;
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import cn.roothub.base.BaseEntity;
 import cn.roothub.dto.PageDataBody;
 import cn.roothub.dto.Result;
@@ -29,16 +9,21 @@ import cn.roothub.entity.Topic;
 import cn.roothub.entity.User;
 import cn.roothub.entity.Visit;
 import cn.roothub.exception.ApiAssert;
-import cn.roothub.service.CollectService;
-import cn.roothub.service.NoticeService;
-import cn.roothub.service.ReplyService;
-import cn.roothub.service.TopicService;
-import cn.roothub.service.UserService;
-import cn.roothub.service.VisitService;
+import cn.roothub.service.*;
 import cn.roothub.store.StorageService;
-import cn.roothub.util.Base64Util;
 import cn.roothub.util.CookieAndSessionUtil;
 import cn.roothub.util.bcrypt.BCryptPasswordEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Date;
 
 @Controller
 public class UserController extends BaseController{
@@ -167,15 +152,6 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping(value = "/user/settings/profile", method = RequestMethod.GET)
 	private String setting(HttpServletRequest request) {
-		/*RootUser user = null;
-		String cookie = CookieAndSessionUtil.getCookie(request, "user");
-		if(cookie == null) {
-			return "error-page/500";
-		}
-		user = rootUserService.findByName(Base64Util.decode(cookie));
-		request.setAttribute("user", user);
-		return "user/profile";*/
-		
 		User user2 = getUser(request);
 		if(user2 == null) {
 			return "error-page/500";

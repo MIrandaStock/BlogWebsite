@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,16 @@ public class TopicServiceImpl implements TopicService{
 	private TopicDao rootTopicDao;
 	@Autowired
 	private UserDao rootUserDao;
+
+	/**
+	 * 查询所有合理话题，不包括删除的和被屏蔽的
+	 */
+	@Override
+	public PageDataBody<Topic> pageByValid(Integer pageNumber, Integer pageSize){
+		List<Topic> list = rootTopicDao.selectAllValid((pageNumber - 1) * pageSize, pageSize);
+		int total=rootTopicDao.countTopicAllValid();
+		return new PageDataBody<>(list, pageNumber, pageSize,total);
+	}
 	
 	/**
 	 * 根据节点和节点板块查询话题
@@ -91,6 +102,14 @@ public class TopicServiceImpl implements TopicService{
 	}
 
 	/**
+	 * 根据作者昵称查询话题
+	 */
+	@Override
+	public List<Topic> findByAuthor(String author){
+		return rootTopicDao.selectAllByAuthor(author);
+	}
+
+	/**
 	 * 查询当前作者的其他话题
 	 */
 	@Override
@@ -109,6 +128,28 @@ public class TopicServiceImpl implements TopicService{
 		return new PageDataBody<>(list, pageNumber, pageSize, totalRow);
 	}
 
+
+	/**
+	 * 根据作者昵称分页查询所有没有被屏蔽话题
+	 */
+	@Override
+	public PageDataBody<Topic> pageByAuthorAndValid(Integer pageNumber, Integer pageSize, String author){
+		int totalRow = rootTopicDao.countAllValidByName(author);
+		List<Topic> list = rootTopicDao.selectValidByAuthor(author, (pageNumber - 1) * pageSize, pageSize);
+		return new PageDataBody<>(list, pageNumber, pageSize, totalRow);
+	}
+
+	/**
+	 * 根据作者昵称分页查询所有被屏蔽话题
+	 */
+	@Override
+	 public PageDataBody<Topic> pageByAuthorAndInvalid(Integer pageNumber, Integer pageSize, String author){
+		int totalRow = rootTopicDao.countAllInvalidByName(author);
+		List<Topic> list = rootTopicDao.selectInvalidByAuthor(author, (pageNumber - 1) * pageSize, pageSize);
+		return new PageDataBody<>(list, pageNumber, pageSize, totalRow);
+	}
+
+
 	/**
 	 * 查询所有话题
 	 */
@@ -121,8 +162,18 @@ public class TopicServiceImpl implements TopicService{
 	 * 根据ID删除话题
 	 */
 	@Override
-	public void deleteByTopicId(Integer topicId) {
-		rootTopicDao.deleteById(topicId);
+	public boolean deleteByTopicId(Integer topicId) {
+		try{
+			int delete=rootTopicDao.deleteById(topicId);
+			if(delete <= 0) {
+				throw new SQLException("发布话题失败！");
+			}else {
+				return true;
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**

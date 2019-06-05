@@ -1429,7 +1429,6 @@ a.node:active, a.node:link, a.node:visited {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    /* background-color: #777; */
     border-radius: 10px;
 }
 

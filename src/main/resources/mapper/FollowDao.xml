@@ -60,6 +60,7 @@
 		where a.uid = #{uid}
 		and a.fid = b.user_id
 		and b.user_name = c.author
+		and c.show_status=1
 		order by c.create_date desc
 		<if test="start != null">
             limit #{start,jdbcType=INTEGER}
@@ -127,5 +128,6 @@
      	where a.uid = #{uid}
      	and a.fid = b.user_id
      	and b.user_name = c.author
+		and c.show_status = 1
      </select>
 </mapper>

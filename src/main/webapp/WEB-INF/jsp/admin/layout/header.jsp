@@ -66,9 +66,9 @@
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
     <!-- Sidebar toggle button-->
-    <a href="/admin/index" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-      <span class="sr-only">Toggle navigation</span>
-    </a>
+  <a href="/admin/index" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+  <span class="sr-only">Toggle navigation</span>
+  </a>
     <div class="pull-right" style="line-height: 50px; padding-right: 15px;">
       <a href="/changeLanguage?lang=zh" style="color: #fff;">中文</a>&nbsp;&nbsp;
       <a href="/changeLanguage?lang=en" style="color: #fff;">English</a>

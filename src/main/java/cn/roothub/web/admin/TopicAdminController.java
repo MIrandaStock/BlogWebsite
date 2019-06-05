@@ -1,6 +1,15 @@
 package cn.roothub.web.admin;
 
-import java.util.Date;
+import cn.roothub.config.SiteConfig;
+import cn.roothub.dto.PageDataBody;
+import cn.roothub.dto.Result;
+import cn.roothub.entity.Reply;
+import cn.roothub.entity.Topic;
+import cn.roothub.exception.ApiAssert;
+import cn.roothub.service.NodeService;
+import cn.roothub.service.ReplyService;
+import cn.roothub.service.TopicService;
+import cn.roothub.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,14 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import cn.roothub.config.SiteConfig;
-import cn.roothub.dto.PageDataBody;
-import cn.roothub.dto.Result;
-import cn.roothub.entity.Topic;
-import cn.roothub.exception.ApiAssert;
-import cn.roothub.service.NodeService;
-import cn.roothub.service.ReplyService;
-import cn.roothub.service.TopicService;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p></p>
@@ -36,6 +40,8 @@ public class TopicAdminController {
 	private NodeService nodeService;
 	@Autowired
 	private ReplyService replyService;
+	@Autowired
+	private UserService userService;
 	
 	/**
 	 * 话题列表
@@ -52,7 +58,7 @@ public class TopicAdminController {
 		if (StringUtils.isEmpty(startDate)) startDate = null;
 	    if (StringUtils.isEmpty(endDate)) endDate = null;
 	    if (StringUtils.isEmpty(author)) author = null;
-		PageDataBody<Topic> page = topicService.pageForAdmin(author, startDate, endDate, p, 25);
+		PageDataBody<Topic> page = topicService.pageForAdmin(author, startDate, endDate, p, 10);
 		model.addAttribute("page", page);
 	    model.addAttribute("startDate", startDate);
 	    model.addAttribute("endDate", endDate);
@@ -91,7 +97,29 @@ public class TopicAdminController {
 		topicService.updateTopic(topic);
 		return new Result<>(true, "更新成功！");
 	}
-	
+
+
+	/**
+	 * 屏蔽或者取消屏蔽
+	 */
+//	@RequiresPermissions("topic:showStatus")
+	@RequestMapping(value = "/showStatus",method = RequestMethod.GET)
+	@ResponseBody
+	public Result<String> showStatus(@RequestParam("id") Integer id){
+		Topic topic = topicService.findById(id);
+		topic.setShowStatus(!topic.getShowStatus());
+		topicService.updateTopic(topic);
+
+		//同时屏蔽相关评论
+		List<Reply> replyList=replyService.findByTopicId(id);
+		for(int i=0;i<replyList.size();i++){
+			replyList.get(i).setIsShow(!replyList.get(i).getIsShow());
+			replyService.update(replyList.get(i));
+		}
+		return new Result<>(true, "更新成功！");
+	}
+
+
 	/**
 	 * 删除话题
 	 * @param id
@@ -101,13 +129,12 @@ public class TopicAdminController {
 	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	@ResponseBody
 	public Result<String> delete(@RequestParam("id") Integer id){
-		Topic topic = topicService.findById(id);
-		topic.setIsDelete(!topic.getIsDelete());
-		topic.setUpdateDate(new Date());
-		topicService.updateTopic(topic);
-		// 删除关联的评论
-		replyService.deleteByTopicId(id);
-		return new Result<>(true, "删除成功！");
+		if (topicService.deleteByTopicId(id) && replyService.deleteByTopicId(id)){
+			return new Result<>(true, "删除成功！");
+		}else{
+			return new Result<>(false, "删除失败！");
+		}
+
 	}
 	
 	/**

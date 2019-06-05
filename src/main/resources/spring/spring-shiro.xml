@@ -12,14 +12,13 @@
     			<ref bean="accountRealm"/>
     		</list>
         </property>
-        
         <property name="rememberMeManager.cookie.maxAge" value="10"></property>
     </bean>
     
     <bean id="authenticator" 
     	class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
     	<property name="authenticationStrategy">
-    		<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"></bean>
+    		<bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"/>
     	</property>
     </bean>
     
@@ -49,6 +48,7 @@
     <!-- id 必须和 web.xml 文件中配置的 DelegatingFilterProxy 的 <filter-name> 一致，
     	   若不一致, 则会抛出: NoSuchBeanDefinitionException. 因为 Shiro 会来 IOC 容器中查找和 <filter-name> 名字对应的 filter bean -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--注入安全管理器对象-->
         <property name="securityManager" ref="securityManager"/>
         <!-- 登录页面 ，如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面 -->
         <property name="loginUrl" value="/admin/login"/>

@@ -17,7 +17,7 @@ public interface FollowService {
 	PageDataBody<User> page(Integer pageNumber, Integer pageSize,Integer uid);
 	
 	/**
-	 * 关注人的主题
+	 * 关注人的主题,没有被屏蔽的
 	 * @param pageNumber
 	 * @param pageSize
 	 * @param uid

@@ -1,11 +1,12 @@
 package cn.roothub.dao;
 
-import java.util.Date;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import cn.roothub.entity.Tag;
 import cn.roothub.entity.Topic;
 import cn.roothub.entity.User;
-import cn.roothub.entity.Tag;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
 
 public interface TopicDao {
 
@@ -14,7 +15,18 @@ public interface TopicDao {
 	 * @return
 	 */
 	List<Topic> selectAll();
-	
+
+    /**
+     * 根据作者昵称查询所有话题
+     */
+    List<Topic> selectAllByAuthor(String author);
+
+    /**
+     * 查询所有合理话题，不包括删除的和被屏蔽的
+     */
+	List<Topic> selectAllValid(@Param("start") Integer start, @Param("limit") Integer limit);
+
+
 	/**
 	 * 根据板块查询所有话题
 	 * @param start
@@ -117,6 +129,24 @@ public interface TopicDao {
     List<Topic> selectByAuthor(@Param("author") String author, @Param("start") Integer start, @Param("limit") Integer limit);
 
     /**
+     * 根据作者昵称分页查询所有未被屏蔽话题
+     * @param author
+     * @param start
+     * @param limit
+     * @return
+     */
+    List<Topic> selectValidByAuthor(@Param("author") String author, @Param("start") Integer start, @Param("limit") Integer limit);
+
+    /**
+     * 根据作者昵称分页查询所有被屏蔽话题
+     * @param author
+     * @param start
+     * @param limit
+     * @return
+     */
+    List<Topic> selectInvalidByAuthor(@Param("author") String author, @Param("start") Integer start, @Param("limit") Integer limit);
+
+    /**
      * 根据话题ID查询话题
      * @param userId
      * @param start
@@ -193,7 +223,14 @@ public interface TopicDao {
      * @return
      */
     int deleteByAuthor(@Param("author") String author);
-    
+
+
+    /**
+     * 统计所有合理话题，不包括删除的和屏蔽的
+     * @return
+     */
+    int countTopicAllValid();
+
     /**
      * 根据节点统计所有话题
      * @return
@@ -224,7 +261,19 @@ public interface TopicDao {
      * @return
      */
     int countAllByName(@Param("name") String name);
-    
+
+    /**
+     * 根据昵称统计所有未被屏蔽话题
+     * @return
+     */
+    int countAllValidByName(@Param("name") String name);
+
+    /**
+     * 根据昵称统计所有被屏蔽话题
+     * @return
+     */
+    int countAllInvalidByName(@Param("name") String name);
+
     /**
      * 根据昵称和板块统计话题
      * @return

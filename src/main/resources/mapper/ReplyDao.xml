@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <include refid="Base_Column_List"/>
     FROM
     reply
-    order create_date
+    order By create_date
     <if test="start != null">
       limit #{start,jdbcType=INTEGER}
       <if test="limit != null">
@@ -65,6 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where a.topic_id = b.topic_id
 	and a.reply_author_id = c.user_id
 	and a.reply_author_name = #{replyAuthorName}
+    and a.is_show = 0
 	ORDER BY a.create_date desc
     <if test="start != null">
       limit #{start,jdbcType=INTEGER}
@@ -82,16 +83,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     where reply_id = #{replyId}
   </select>
 
-  <!-- 根据话题ID查询评论
-  <select id="selectByTopicId" resultType="Reply">
+  <!-- 根据话题ID查询所有评论-->
+  <select id="selectAllByTopicId" resultType="Reply">
     SELECT
     <include refid="Base_Column_List"/>
     FROM
     reply
     where topic_id = #{topicId}
-    order create_date
+    order BY create_date
   </select>
-   -->
+
 
   <!-- 根据话题ID分页查询评论 -->
   <select id="selectByTopicId" resultType="Reply">
@@ -122,7 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     FROM
     reply
     where topic_author_id = #{topicAuthorId}
-    order create_date desc
+    order By create_date desc
   </select>
   <!-- 根据评论人ID查询评论 -->
   <select id="selectByReplyAuthorId" resultType="Reply">
@@ -131,7 +132,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     FROM
     reply
     where reply_author_id = #{replyAuthorId}
-    order create_date desc
+    order By create_date desc
   </select>
 
   <!-- 添加评论 -->
@@ -244,7 +245,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     from 
     	reply a,topic b
     where 
-    	a.is_delete = 0 
+    	a.is_delete = 0
+    and
+        a.is_show=0
     and 
     	a.reply_author_name = #{name}
     and 

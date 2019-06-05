@@ -20,21 +20,28 @@
         <id column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
+		<result column="user_sex" jdbcType="VARCHAR" property="userSex"/>
+		<result column="user_addr" jdbcType="VARCHAR" property="userAddr"/>
         <result column="score" jdbcType="INTEGER" property="score"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="signature" jdbcType="VARCHAR" property="signature"/>
+		<result column="third_id" jdbcType="VARCHAR" property="thirdID"/>
         <result column="receive_msg" jdbcType="BIT" property="receiveMsg"/>
         <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
-        <result column="user_addr" jdbcType="VARCHAR" property="userAddr"/>
-        <result column="third_id" jdbcType="VARCHAR" property="thirdId"/>
+		<result column="is_block" jdbcType="BIT" property="isBlock"/>
         <result column="third_access_token" jdbcType="VARCHAR" property="thirdAccessToken"/>
+		<result column="status_cd" jdbcType="VARCHAR" property="statusCd"/>
+		<result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+		<result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp"/>
+		<result column="user_type" jdbcType="VARCHAR" property="userType"/>
+		<result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Base_Column_List">
-        user_id, user_name, password, user_sex, score, avatar, email, url, signature, receive_msg,
-        create_date, update_date,user_addr,third_id,third_access_token
+        user_id, user_name, password, user_sex, score, avatar, email, url, signature, third_id, receive_msg,
+        create_date, update_date, is_block, third_access_token, status_cd, login_ip, last_login_ip, user_type, remark
     </sql>
 	<!-- 查询所有用户 -->
 	<select id="selectAll" resultType="User">

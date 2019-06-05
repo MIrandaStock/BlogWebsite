@@ -1,10 +1,11 @@
 package cn.roothub.dao;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import cn.roothub.entity.Follow;
 import cn.roothub.entity.Topic;
 import cn.roothub.entity.User;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface FollowDao {
 
@@ -18,7 +19,7 @@ public interface FollowDao {
 	List<User> select(@Param("start")Integer start,@Param("limit")Integer limit,@Param("uid")Integer uid);
 	
 	/**
-	 * 关注人的主题
+	 * 关注人的主题，不包括被屏蔽的
 	 * @param start
 	 * @param limit
 	 * @param uid
@@ -73,7 +74,7 @@ public interface FollowDao {
 	int isFollow(@Param("uid")Integer uid,@Param("fid")Integer fid);
 	
 	/**
-	 * 关注的人的主题的数量
+	 * 关注的人的主题的数量,不包括被屏蔽的
 	 * @param uid
 	 * @return
 	 */

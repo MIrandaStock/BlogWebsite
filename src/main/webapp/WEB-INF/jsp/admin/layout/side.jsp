@@ -6,22 +6,22 @@
     <ul class="sidebar-menu">
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/resources/images/default-avatar.jpg" class="img-circle"
-               alt="User Image" id="user-avatar">
+            <img src="/resources/images/default-avatar.jpg" class="img-circle" alt="User Image" id="user-avatar">
         </div>
         <div class="pull-left info">
-        <p id="user-name">admin</p>
-          <a href="#"><i class="fa fa-circle text-success"></i>管理员</a>
+            <p id="user-name">admin</p>
+            <a href="#"><i class="fa fa-circle text-success"></i>管理员</a>
         </div>
       </div>
       <li class="header">MAIN NAVIGATION</li>
+      <%--hasPermission标签 ：验证当前用户是否拥有指定权限。--%>
       <shiro:hasPermission name="index:index">
-        <li>
-          <a href="/admin/index">
-            <i class="fa fa-dashboard"></i>
-            <span>仪表盘</span>
-          </a>
-        </li>
+          <li>
+              <a href="/admin/index">
+                  <i class="fa fa-dashboard"></i>
+                  <span>仪表盘</span>
+              </a>
+          </li>
       </shiro:hasPermission>
       <shiro:hasPermission name="topic:list">
         <li>
@@ -105,7 +105,7 @@
                 </a>
               </li>
             </shiro:hasPermission>
-            
+
             <shiro:hasPermission name="system:edit">
             <li>
               <a href="/admin/system/edit?pid=48&index=1">
@@ -113,7 +113,7 @@
               </a>
             </li>
             </shiro:hasPermission>
-            
+
             <shiro:hasPermission name="system:edit">
             <li>
               <a href="/admin/system/edit?pid=4&index=2">
@@ -121,7 +121,7 @@
               </a>
             </li>
             </shiro:hasPermission>
-            
+
            <shiro:hasPermission name="system:edit">
             <li>
               <a href="/admin/system/edit?pid=2&index=3">
@@ -129,7 +129,7 @@
               </a>
             </li>
             </shiro:hasPermission>
-            
+
             <shiro:hasPermission name="system:edit">
             <li>
               <a href="/admin/system/edit?pid=5&index=4">
@@ -137,7 +137,7 @@
               </a>
             </li>
             </shiro:hasPermission>
-            
+
           </ul>
         </li>
       </shiro:hasPermission>
@@ -163,7 +163,7 @@
   				}
   			},
   			error: function(data){
-  				
+
   			}
   		});
   	})

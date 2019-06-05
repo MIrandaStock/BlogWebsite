@@ -1,16 +1,15 @@
 package cn.roothub.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import cn.roothub.dao.FollowDao;
 import cn.roothub.dto.PageDataBody;
 import cn.roothub.entity.Follow;
 import cn.roothub.entity.Topic;
 import cn.roothub.entity.User;
 import cn.roothub.service.FollowService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FollowServiceImpl implements FollowService{
@@ -79,8 +78,7 @@ public class FollowServiceImpl implements FollowService{
 	}
 
 	/**
-	 * 关注的人的主题
-	 */
+	 * 关注的人的主题，不包括被屏蔽的	 */
 	@Override
 	public PageDataBody<Topic> pageTopic(Integer pageNumber, Integer pageSize, Integer uid) {
 		int total = followDao.countTopic(uid);

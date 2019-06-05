@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -38,6 +39,8 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private TabService tabService;
 	@Autowired
 	private NodeService nodeService;
+	@Autowired
+	private TopicService topicService;
 	
 	/**
 	 * 话题详情
@@ -79,7 +82,42 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 		request.setAttribute("notReadNotice", notReadNotice);
 		return "topic/detail";
 	}
-	
+
+	/**
+	 * test
+	 */
+	@RequestMapping(value = "/test",method = RequestMethod.GET)
+	private String test(){
+		return "index";
+	}
+
+	/**
+	 * 编辑话题页面
+	 */
+	@RequestMapping(value = "/api/user/editTopic",method = RequestMethod.GET)
+	private String edit(@RequestParam(value = "id") Integer topicID,HttpServletRequest request) {
+		request.setAttribute("topic", topicService.findById(topicID));
+		request.setAttribute("vEnter", "\n");
+		return "topic/edit";
+	}
+
+
+	/**
+	 * 编辑话题的接口
+	 */
+	@RequestMapping(value = "/api/user/edit",method = RequestMethod.POST)
+	@ResponseBody
+	private Result<String> edit(@RequestParam("id") Integer id,@RequestParam("title") String title,@RequestParam("content") String content){
+		ApiAssert.notEmpty(title, "标题不能为空");
+		Topic topic = topicService.findById(id);
+		topic.setTitle(title);
+		topic.setContent(content);
+		topic.setUpdateDate(new Date());
+		topicService.updateTopic(topic);
+		return new Result<>(true, "编辑成功！");
+	}
+
+
 	/**
 	 * 发布话题
 	 * @param request

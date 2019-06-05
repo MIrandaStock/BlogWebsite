@@ -1,25 +1,27 @@
 package cn.roothub.service.impl;
 
-import java.util.List;
-import java.util.Map;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import cn.roothub.dao.ReplyDao;
 import cn.roothub.dao.UserDao;
 import cn.roothub.dto.PageDataBody;
 import cn.roothub.dto.ReplyExecution;
+import cn.roothub.entity.Reply;
 import cn.roothub.entity.ReplyAndTopicByName;
 import cn.roothub.entity.Topic;
-import cn.roothub.entity.Reply;
 import cn.roothub.enums.InsertReplyEnum;
 import cn.roothub.exception.OperationFailedException;
 import cn.roothub.exception.OperationRepeaException;
 import cn.roothub.exception.OperationSystemException;
 import cn.roothub.service.ReplyService;
 import cn.roothub.service.TopicService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 评论业务逻辑层
@@ -71,7 +73,15 @@ public class ReplyServiceImpl implements ReplyService{
 	 */
 	@Override
 	public List<Reply> findByTopicId(Integer topicId) {
-		return replyDao.selectByTopicId(topicId);
+		return replyDao.selectAllByTopicId(topicId);
+	}
+
+	/**
+	 * 根据作者昵称查询所有评论
+	 */
+	@Override
+	public List<Reply> findByAuthorId(Integer authorId){
+		return replyDao.selectByTopicAuthorId(authorId);
 	}
 
 	/**
@@ -127,8 +137,18 @@ public class ReplyServiceImpl implements ReplyService{
 	 * 根据话题ID删除评论
 	 */
 	@Override
-	public void deleteByTopicId(Integer topicId) {
-		replyDao.deleteByTopicId(topicId);
+	public boolean deleteByTopicId(Integer topicId) {
+		try{
+			int delete=replyDao.deleteByTopicId(topicId);
+			if(delete <0) {
+				throw new SQLException("删除评论失败！");
+			}else {
+				return true;
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**

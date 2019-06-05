@@ -1,11 +1,12 @@
 package cn.roothub.service;
 
-import java.util.List;
-import java.util.Map;
 import cn.roothub.dto.PageDataBody;
 import cn.roothub.dto.ReplyExecution;
-import cn.roothub.entity.ReplyAndTopicByName;
 import cn.roothub.entity.Reply;
+import cn.roothub.entity.ReplyAndTopicByName;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 评论接口
@@ -52,6 +53,11 @@ public interface ReplyService {
 	 * @return
 	 */
 	List<Reply> findByTopicId(Integer topicId);
+
+	/**
+	 * 根据作者ID查询所有评论
+	 */
+	List<Reply> findByAuthorId(Integer authorId);
 	
 	/**
 	 * 分页查询话题的评论列表
@@ -79,7 +85,7 @@ public interface ReplyService {
 	 * 根据话题ID删除评论
 	 * @param topicId
 	 */
-	void deleteByTopicId(Integer topicId);
+	boolean deleteByTopicId(Integer topicId);
 	
 	/**
 	 * 根据用户名称删除评论

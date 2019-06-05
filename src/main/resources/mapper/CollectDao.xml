@@ -58,6 +58,7 @@
 			topic a,collect b
 		where b.uid = #{uid}
 		and a.topic_id = b.tid
+		and a.show_status=1
 		order by b.create_date desc
 		<if test="start != null">
             limit #{start,jdbcType=INTEGER}
@@ -96,6 +97,8 @@
      	from collect a,topic b
      	where uid = #{uid}
      	and a.tid = b.topic_id
+        and b.show_status=1
+        and b.is_delete=0
      </select>
      <!-- 统计话题被收藏的数量 -->
      <select id="countByTid" resultType="java.lang.Integer">
