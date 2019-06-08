@@ -43,8 +43,6 @@
                                             <span class="label label-primary">精华</span>
                                             <span>•</span>
                                         </c:if>
-                                        <span><a href="/node/${item.nodeSlug}" class="node">${item.nodeTitle}</a></span>
-                                        <span>•</span>
                                         <strong><a href="/user/${item.author}">${item.author}</a></strong>
                                         <span class="hidden-sm hidden-xs">•</span>
                                         <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>

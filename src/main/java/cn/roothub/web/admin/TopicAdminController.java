@@ -147,7 +147,6 @@ public class TopicAdminController {
 	@RequestMapping(value = "/edit",method = RequestMethod.GET)
 	public String edit(@RequestParam("id") Integer id,Model model) {
 		model.addAttribute("topic", topicService.findById(id));
-		model.addAttribute("nodes", nodeService.findAll(null, null));
 		model.addAttribute("vEnter", "\n");
 		return "/admin/topic/edit";
 	}
@@ -157,20 +156,16 @@ public class TopicAdminController {
 	 * @param id
 	 * @param title
 	 * @param content
-	 * @param nodeTitle
 	 * @return
 	 */
 	@RequiresPermissions("topic:edit")
 	@RequestMapping(value = "/edit",method = RequestMethod.POST)
 	@ResponseBody
-	public Result<String> edit(@RequestParam("id") Integer id,@RequestParam("title") String title,
-					  		   @RequestParam("content") String content,@RequestParam("nodeTitle") String nodeTitle){
+	public Result<String> edit(@RequestParam("id") Integer id,@RequestParam("title") String title,@RequestParam("content") String content){
 		ApiAssert.notEmpty(title, "标题不能为空");
-		ApiAssert.notEmpty(nodeTitle, "节点不能为空");
 		Topic topic = topicService.findById(id);
 		topic.setTitle(title);
 		topic.setContent(content);
-		topic.setNodeTitle(nodeTitle);
 		topic.setUpdateDate(new Date());
 		topicService.updateTopic(topic);
 		return new Result<>(true, "编辑成功！");

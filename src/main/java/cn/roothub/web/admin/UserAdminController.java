@@ -7,7 +7,6 @@ import cn.roothub.entity.User;
 import cn.roothub.service.ReplyService;
 import cn.roothub.service.TopicService;
 import cn.roothub.service.UserService;
-import cn.roothub.util.StringUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -61,32 +60,8 @@ public class UserAdminController {
         return "/admin/user/list";
     }
 
-    /**
-     * 编辑用户界面
-     *
-     * @param id
-     * @param model
-     * @return
-     */
-    @RequiresPermissions("user:edit")
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String edit(Integer id, Model model) {
-        model.addAttribute("user", userService.findById(id));
-        return "/admin/user/edit";
-    }
 
-    /**
-     * 编辑用户接口
-     *
-     * @return
-     */
-    @RequiresPermissions("user:edit")
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    @ResponseBody
-    public Result<String> edit(User user) {
-        userService.updateAdmin(user);
-        return new Result<>(true, "编辑成功");
-    }
+
 
     /**
      * 删除用户
@@ -146,16 +121,7 @@ public class UserAdminController {
         }
     }
 
-    /**
-     * 刷新Token
-     *
-     * @return
-     */
-    @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
-    @ResponseBody
-    public Result<String> refreshToken() {
-        return new Result<>(true, StringUtil.getUUID());
-    }
+
 
     /**
      * 局部日期转换，将 String 类型的时间数据转化为 Date 类型

@@ -44,8 +44,6 @@
         <%-- <div class="excerpt"><span>${item.excerpt}</span></div> --%>
         <div class="tip">
         <p class="gray">
-          <a href="/node/${item.nodeSlug}" class="node">${item.nodeTitle}</a>
-		  <span>•</span>
           <strong><a href="/user/${item.author}">${item.author}</a></strong>
           <span class="hidden-sm hidden-xs">•</span>
           <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>

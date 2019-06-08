@@ -238,10 +238,9 @@ public class TopicServiceImpl implements TopicService{
 	}
 	
 	@Override
-	public TopicExecution createTopic(String title, String content, String tab, String nodeCode,String nodeTitle, String tag,User user) {
+	public TopicExecution createTopic(String title, String content, String tag,User user) {
 		Topic topic = new Topic();
 		topic.setPtab(null);
-		topic.setTab(tab);
 		topic.setTitle(title);
 		topic.setTag(tag);
 		topic.setContent(content);
@@ -260,8 +259,6 @@ public class TopicServiceImpl implements TopicService{
 		topic.setPostGoodCount(null);
 		topic.setPostBadCount(null);
 		topic.setStatusCd("1000");
-		topic.setNodeSlug(nodeCode);
-		topic.setNodeTitle(nodeTitle);
 		topic.setRemark(null);
 		topic.setAvatar(user.getAvatar());//话题作者的头像
 		topic.setUrl(null);

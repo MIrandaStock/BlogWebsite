@@ -54,8 +54,6 @@
                                         <c:if test="${item.good}">
                                             <span class="label label-success">精华</span> <span>•</span>
                                         </c:if>
-                                        <span><a href="/n/${item.nodeTitle}" class="node">${item.nodeTitle}</a></span>
-                                        <span>•</span>
                                         <a href="/user/${item.author}">${item.author}</a>
                                         <c:if test="${item.viewCount > 0}">
                                             <span class="hidden-sm hidden-xs">•</span>

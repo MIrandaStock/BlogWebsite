@@ -52,9 +52,6 @@
               <td><fmt:formatDate type="both" value="${user.createDate}" /></td>
               <td>
                   <shiro:hasPermission name="user:edit">
-                  	<a href="/admin/user/edit?id=${user.userId}" class="btn btn-xs btn-warning">编辑</a>
-                  </shiro:hasPermission>
-                  <shiro:hasPermission name="user:edit">
                   	<button onclick="actionBtn('${user.userId}','delete',this)" class="btn btn-xs btn-danger">删除</button>
                   </shiro:hasPermission>
                     <button onclick="actionBtn('${user.userId}','blacklist',this)" class="btn btn-xs btn-danger">

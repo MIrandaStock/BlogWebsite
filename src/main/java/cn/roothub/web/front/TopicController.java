@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,10 +51,6 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private String detail(@PathVariable Integer id, Model model,@RequestParam(value = "p", defaultValue = "1") Integer p,HttpServletRequest request) {
 		Topic topic = rootTopicService.findByTopicId(id);
 		User user = getUser(request);
-		/*if(topic == null) {
-			//return "error-page/404";
-			throw new RuntimeException("话题不存在");
-		}*/
 		ApiAssert.notNull(topic, "话题消失了~");
 		//浏览量+1
 		topic.setViewCount(topic.getViewCount()+ 1);
@@ -137,23 +132,21 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	 * 发布话题逻辑
 	 * @param title
 	 * @param content
-	 * @param nodeTitle
 	 * @param tag:标签，暂时只能输入一个
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value = "/topic/save", method = RequestMethod.POST)
 	@ResponseBody
-	private Result<TopicExecution> save(String title, String content, /*String tab,*/ /*String nodeCode,*/String nodeTitle, String tag, HttpServletRequest request){
+	private Result<TopicExecution> save(String title, String content, String tag, HttpServletRequest request){
 		User user = getUser(request);
 		ApiAssert.notNull(user, "请先登录");
 		ApiAssert.notNull(title, "标题不能为空");
 		// ApiAssert.notNull(tab, "板块不能为空");
 		// ApiAssert.notNull(nodeCode, "节点不能为空");
-		// ApiAssert.notNull(tag, "标签不能为空");
-		//TopicExecution saveTopic = rootTopicService.saveTopic(topic);
-		if(StringUtils.isEmpty(tag)) tag = null;
-		TopicExecution saveTopic = rootTopicService.createTopic(title, content, null, null, nodeTitle, tag ,user);
+		 ApiAssert.notNull(tag, "标签不能为空");
+//		if(StringUtils.isEmpty(tag)) tag = null;
+		TopicExecution saveTopic = rootTopicService.createTopic(title, content, tag ,user);
 //		logger.debug("保存的话题："+saveTopic.toString());
 		return new Result<TopicExecution>(true, saveTopic);
 	}

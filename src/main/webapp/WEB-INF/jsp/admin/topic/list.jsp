@@ -54,7 +54,7 @@
                             <td><a href="/user/${topic.author}" target="_blank">${topic.author}</a></td>
                             <td>
                                 <c:if test="${topic.top}">置顶</c:if>
-                                <c:if test="${topic.good}">精华</c:if>
+                                <c:if test="${topic.good}">热文</c:if>
                                 &nbsp;
                             </td>
                             <td>${topic.nodeTitle}</td>
@@ -71,8 +71,8 @@
                                 <shiro:hasPermission name="topic:good">
                                     <button onclick="actionBtn('${topic.topicId}', 'good', this)" class="btn btn-xs btn-primary">
                                         <c:choose>
-                                            <c:when test="${topic.good}"> 取消加精</c:when>
-                                            <c:otherwise> 加精</c:otherwise>
+                                            <c:when test="${topic.good}"> 取消热文</c:when>
+                                            <c:otherwise> 设为热文</c:otherwise>
                                         </c:choose>
                                     </button>
                                 </shiro:hasPermission>

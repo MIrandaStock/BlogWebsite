@@ -18,11 +18,7 @@ public class TopicExecution {
 	 * @param topicName
 	 * @param stateEnum
 //	 */
-//	public TopicExecution(String title,InsertTopicEnum stateEnum) {
-//		this.title = title;
-//		this.state = stateEnum.getState();
-//		this.stateInfo = stateEnum.getStateInfo();
-//	}
+
 	
 	/**
 	 * 成功时的构造器

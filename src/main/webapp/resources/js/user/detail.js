@@ -154,8 +154,6 @@ function topicList(pageNumber) {
                         </div>\
                         <div class=\"tip\">\
                         <p>\
-                        <span><a href=\"/n/" + data.data.list[i].nodeTitle + "\" class=\"node\">" + data.data.list[i].nodeTitle + "</a></span>\
-                        <span>•</span>\
                         <a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
                         <span class=\"hidden-sm hidden-xs\">•</span>\
                         <span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\
@@ -270,8 +268,6 @@ function    collectList(pageNumber) {
 					<div class=\"title\"> <a href=\"/topic/" + data.data.list[i].topicId + "\"> " + data.data.list[i].title + " </a></div>\
 					<div class=\"tip\">\
 					<p>\
-					<span><a href=\"/n/" + data.data.list[i].nodeTitle + "\" class=\"node\">" + data.data.list[i].nodeTitle + "</a></span>\
-					<span>•</span>\
 					<a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
 					<span class=\"hidden-sm hidden-xs\">•</span>\
 					<span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\
@@ -317,8 +313,6 @@ function followList(pageNumber) {
 					<div class=\"title\"><a href=\"/topic/" + data.data.list[i].topicId + "\"> " + data.data.list[i].title + " </a></div>\
 					<div class=\"tip\">\
 					<p>\
-					<span><a href=\"/n/" + data.data.list[i].nodeTitle + "\" class=\"node\">" + data.data.list[i].nodeTitle + "</a></span>\
-					<span>•</span>\
 					<a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
 					<span class=\"hidden-sm hidden-xs\">•</span>\
 					<span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\
@@ -440,53 +434,6 @@ function fansList(pageNumber) {
     });
 }
 
-// /*提问*/
-// function topicQnaList(pageNumber) {
-//     $(".cell_tabs a").removeClass("cell_tab_current");
-//     $(".cell_tabs a").addClass("cell_tab");
-//     $(".cell_tabs a").eq(5).removeClass("cell_tab");
-//     $(".cell_tabs a").eq(5).addClass("cell_tab_current");
-//     $.ajax({
-//         url: "/api/user/topic/qna",
-//         type: "get",
-//         dataType: "json",
-//         data: {
-//             name: authorName,
-//             p: pageNumber
-//         },
-//         success: function (data) {
-//             $(".itemList").html('');
-//             for (var i = 0; i < data.data.list.length; i++) {
-//                 $(".itemList").append("<div class=\"panel-body paginate-bot\" style=\"border-bottom: 1px solid #e2e2e2;\">\
-// 					<div class=\"media\">\
-// 					<div class=\"media-body\">\
-// 					<div class=\"title\"><a href=\"/topic/" + data.data.list[i].topicId + "\"> " + data.data.list[i].title + " </a></div>\
-// 					<div class=\"tip\">\
-// 					<p>\
-// 					<span><a href=\"/n/" + data.data.list[i].nodeTitle + "\" class=\"node\">" + data.data.list[i].nodeTitle + "</a></span>\
-// 					<span>•</span>\
-// 					<a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
-// 					<span class=\"hidden-sm hidden-xs\">•</span>\
-// 					<span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\
-// 					<span>•</span>\
-// 					<span>" + formatDate(Date.parse(data.data.list[i].createDate)) + "</span>\
-// 					</p>\
-// 					</div>\
-// 					</div>\
-// 					<div class=\"media-right\"><span class=\"badge badge-default\"><a href=\"/topic/" + data.data.list[i].topicId + "\">" + data.data.list[i].replyCount + "</a></span></div>\
-// 					</div>\
-// 					</div>");
-//             }
-//             $(".itemList").append("<div class=\"panel-footer\" id=\"paginate\"></div>");
-//             paginate(data.data.totalRow, data.data.pageSize, pageNumber, "#");
-//         },
-//         error: function (data) {
-//
-//         }
-//     });
-// }
-
-
 // 被屏蔽
 function shield(pageNumber){
     $(".cell_tabs a").removeClass("cell_tab_current");
@@ -510,8 +457,6 @@ function shield(pageNumber){
 					<div class=\"title\"><a href=\"/topic/" + data.data.list[i].topicId + "\"> " + data.data.list[i].title + " </a></div>\
 					<div class=\"tip\">\
 					<p>\
-					<span><a href=\"/n/" + data.data.list[i].nodeTitle + "\" class=\"node\">" + data.data.list[i].nodeTitle + "</a></span>\
-					<span>•</span>\
 					<a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
 					<span class=\"hidden-sm hidden-xs\">•</span>\
 					<span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\

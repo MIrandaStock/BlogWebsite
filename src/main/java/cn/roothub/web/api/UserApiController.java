@@ -227,7 +227,7 @@ public class UserApiController extends BaseController{
 			map.put("countFollow", countFollow);
 			map.put("countNotReadNotice", countNotReadNotice);
 			map.put("countScore", countScore);
-			return new Result<Map>(true, map);
+			return new Result<>(true, map);
 		}
 	}
 	

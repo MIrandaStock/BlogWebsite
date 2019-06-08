@@ -34,16 +34,16 @@
                                     href="javascript:cancelReply();">取消</a></p>
                             <div id="editor" style="margin-bottom: 10px;"></div>
                         </div>
-                        <c:if test="${fn:length(node) == 0}">
-                            <div class="form-group">
-                                <label for="node">节点</label>
-                                <select id="node" class="form-control" name="node">
-                                    <c:forEach var="item" items="${nodeList}" varStatus="status">
-                                        <option value="${item.nodeTitle}">${item.nodeTitle}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </c:if>
+                        <%--<c:if test="${fn:length(node) == 0}">--%>
+                            <%--<div class="form-group">--%>
+                                <%--<label for="node">节点</label>--%>
+                                <%--<select id="node" class="form-control" name="node">--%>
+                                    <%--<c:forEach var="item" items="${nodeList}" varStatus="status">--%>
+                                        <%--<option value="${item.nodeTitle}">${item.nodeTitle}</option>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
+                        <%--</c:if>--%>
                         <div class="form-group">
                             <div class="form-group">
                                 <label for="title">标签</label>
@@ -122,10 +122,10 @@
             // 普通格式的内容
             var contentText = editor.txt.text();
 
-            var node = "${node}";
+            <%--var node = "${node}";--%>
 
             // 节点
-            var nodeTitle = node ? node : $("#node option:selected").val();
+            // var nodeTitle = node ? node : $("#node option:selected").val();
             // 标签
             var tag = $("#tag").val();
             // var avatar = $("#editor").find("img:first").attr("src");
@@ -145,7 +145,7 @@
                     data: {
                         title: title,
                         content: contentHtml,
-                        nodeTitle: nodeTitle,
+                        // nodeTitle: nodeTitle,
                         tag: tag
                     },
                     success: function (data) {

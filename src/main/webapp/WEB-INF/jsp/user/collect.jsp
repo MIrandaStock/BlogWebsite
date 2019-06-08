@@ -45,21 +45,11 @@
 			  	<c:if test="${item.good}">
 			  	<span class="label label-primary">精华</span> <span>•</span>
 			  	</c:if>
-			  	<span><a href="/node/${item.nodeSlug}" class="node">${item.nodeTitle}</a></span>
-			    <span>•</span>
                 <strong><a href="/user/${item.author}">${item.author}</a></strong>
                 <span class="hidden-sm hidden-xs">•</span>
                 <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>
-                <!-- <span class="hidden-sm hidden-xs">•</span> -->
-                <%-- <span class="hidden-sm hidden-xs"><a href="/topic/${item.topicId}">${item.replyCount}个评论</a></span> --%>
                 <span>•</span>
                 <span><fmt:formatDate type="date" value="${item.createDate}" /></span>
-                  <%-- <c:if test="${item.lastReplyAuthor != null}">
-                  <span>•</span>
-                  <span>最后回复来自 <a href="/user/${item.lastReplyAuthor}">${item.lastReplyAuthor}</a></span>
-                  </c:if> --%>
-                  <!-- <span>•</span> -->
-                  <%-- <a href="/topic/tag/${item.tag}"><span class="label label-success">${item.tag}</span></a> --%>
                 </p>
                 </div>
               </div>
