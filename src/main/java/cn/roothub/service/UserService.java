@@ -22,14 +22,22 @@ public interface UserService {
 	 * @return
 	 */
 	User findById(Integer userId);
+
+	/**
+	 * 根据昵称查找注册成功用户
+	 * @param userName
+	 * @return
+	 */
+	User findByNameno(String userName);
 	
 	/**
-	 * 根据昵称查找用户
+	 * 根据昵称在所有用户里查找用户
 	 * @param userName
 	 * @return
 	 */
 	User findByName(String userName);
-	
+
+
 	/**
 	 * 根据email查找用户
 	 * @param email
@@ -67,7 +75,12 @@ public interface UserService {
 	 * @return
 	 */
 	void updateScore(Integer score,Integer userId);
-	
+
+	/**
+	 *
+	 * 同意注册后更新类型
+	 */
+     void updateUserType(String userName);
 	/**
 	 * 更新头像
 	 * @param avatarBase64:base64格式的图片
@@ -131,6 +144,12 @@ public interface UserService {
 	int countToday();
 	
 	PageDataBody<User> pageForAdmin(String username, String email, Integer pageNumber, Integer pageSize);
+
+	/**
+	 * 后台通过用户类型查询申请注册的用户
+	 * @return
+	 */
+	PageDataBody<User> pageForAdminByUserType(String username, String email, Integer pageNumber, Integer pageSize);
 	
 	int countAllForAdmin(String username,String email);
 	

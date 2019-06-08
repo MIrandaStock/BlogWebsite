@@ -12,11 +12,12 @@
 <body>
   <div class="wrapper">
     <jsp:include page="components/head.jsp"></jsp:include>
-    <div class="row">
+    <div class="row" style="margin-left:80px;margin-top: 40px; ">
       <div class="col-md-9">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <a href="/">主页</a> / 登录
+            <a href="/" style="color: white">主页</a>
+            <a href="" style="color: white">/&nbsp;登录</a>
           </div>
           <c:if test="${message != null}">
           <div class="message">${message}</div>
@@ -31,7 +32,7 @@
                 <label for="password">密码</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="密码">
               </div>
-              <button type="button" id="btn" class="btn btn-primary">登录</button>
+              <button type="button" id="btn" class="btn btn-primary" style="background-color: darkred;margin-right: 0;">登录</button>
             </form>
           </div>
         </div>
@@ -40,6 +41,7 @@
   </div>
  </div>
 </div>
+
   <jsp:include page="components/foot.jsp"></jsp:include>
   <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
   <script src="/resources/js/jquery.js"></script>

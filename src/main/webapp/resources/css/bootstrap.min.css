@@ -10,7 +10,8 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
+
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
@@ -1355,7 +1356,7 @@ body {
     font-size: 14px;
     line-height: 1.42857143;
     color: #333;
-    background-color: #fff
+    background-color: #fff;
 }
 
 button, input, select, textarea {
@@ -1830,13 +1831,14 @@ pre code {
 
 @media (min-width: 768px) {
     .container {
-        width: 750px
+        width: 750px;
+
     }
 }
 
 @media (min-width: 992px) {
     .container {
-        width: 970px
+        width: 970px;
     }
 }
 
@@ -1855,7 +1857,8 @@ pre code {
 
 .row {
     margin-right: -15px;
-    margin-left: -15px
+    margin-left: -15px;
+    margin-bottom: 50px;
 }
 
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
@@ -4415,8 +4418,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 }
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:focus, .nav-pills > li.active > a:hover {
-    color: #fff;
-    background-color: #337ab7
+    color: white;
 }
 
 .nav-stacked > li {
@@ -4497,9 +4499,10 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
 .navbar {
     position: relative;
-    min-height: 50px;
+    min-height: 80px;
     margin-bottom: 20px;
-    border: 1px solid transparent
+    border: 1px solid transparent;
+    background-color: darkred;
 }
 
 @media (min-width: 768px) {
@@ -4704,7 +4707,9 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 @media (min-width: 768px) {
     .navbar-nav {
         float: left;
-        margin: 0
+        margin: 0;
+        margin-top: 15px;
+        margin-left: 10px;
     }
 
     .navbar-nav > li {
@@ -4798,7 +4803,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 @media (min-width: 768px) {
     .navbar-form {
         width: auto;
-        padding-top: 0;
+        padding-top: 15px;
         padding-bottom: 0;
         margin-right: 0;
         margin-left: 0;
@@ -4866,8 +4871,8 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 }
 
 .navbar-default {
-    background-color: #f8f8f8;
-    border-color: #e7e7e7
+    background-color:  rgba(182, 18, 18, 0.884);
+    border-color: rgba(182, 18, 18, 0.884);
 }
 
 .navbar-default .navbar-brand {
@@ -4884,21 +4889,21 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: #777
+    color: white;
 }
 
 .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
-    color: #333;
+    color: black;
     background-color: transparent
 }
 
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-    color: #555;
-    background-color: #e7e7e7
+    color: white;
+
 }
 
 .navbar-default .navbar-nav > .disabled > a, .navbar-default .navbar-nav > .disabled > a:focus, .navbar-default .navbar-nav > .disabled > a:hover {
-    color: #ccc;
+    color: black;
     background-color: transparent
 }
 
@@ -5857,7 +5862,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
 
 .panel {
     margin-bottom: 20px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.712);
     border: 1px solid transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
@@ -6045,7 +6050,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
 
 .panel-default > .panel-heading {
     color: #333;
-    background-color: #f5f5f5;
+    background-color: rgba(182, 18, 18, 0.79);
     border-color: #ddd
 }
 
@@ -6921,7 +6926,7 @@ button.close {
 
 .btn-group-vertical > .btn-group:after, .btn-group-vertical > .btn-group:before, .btn-toolbar:after, .btn-toolbar:before, .clearfix:after, .clearfix:before, .container-fluid:after, .container-fluid:before, .container:after, .container:before, .dl-horizontal dd:after, .dl-horizontal dd:before, .form-horizontal .form-group:after, .form-horizontal .form-group:before, .modal-footer:after, .modal-footer:before, .modal-header:after, .modal-header:before, .nav:after, .nav:before, .navbar-collapse:after, .navbar-collapse:before, .navbar-header:after, .navbar-header:before, .navbar:after, .navbar:before, .pager:after, .pager:before, .panel-body:after, .panel-body:before, .row:after, .row:before {
     display: table;
-    content: " "
+    content: " ";
 }
 
 .btn-group-vertical > .btn-group:after, .btn-toolbar:after, .clearfix:after, .container-fluid:after, .container:after, .dl-horizontal dd:after, .form-horizontal .form-group:after, .modal-footer:after, .modal-header:after, .nav:after, .navbar-collapse:after, .navbar-header:after, .navbar:after, .pager:after, .panel-body:after, .row:after {
@@ -7208,4 +7213,13 @@ button.close {
     }
 }
 
+#container{
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color: rgba(182, 18, 18, 0.884);
+    color:white;
+    clear:both;
+}
 /*# sourceMappingURL=bootstrap.min.css.map */

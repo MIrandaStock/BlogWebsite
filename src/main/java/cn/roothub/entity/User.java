@@ -107,7 +107,7 @@ public class User {
 	private String lastLoginIp;
 	
 	/**
-	 * 用户类型 0:超级管理员 1:版主 2:普通用户
+	 * 用户类型 0:超级管理员 1:版主 2:普通用户（申请已通过） 3：屏蔽用户 4：申请注册
 	 */
 	private String userType;
 	

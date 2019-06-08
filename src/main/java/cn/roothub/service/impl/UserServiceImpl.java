@@ -68,14 +68,21 @@ public class UserServiceImpl implements UserService{
 	}
 
 	/**
-	 * 根据昵称查找用户
+	 * 根据昵称查找，剔除注册未成功用户
+	 */
+	@Override
+	public User findByNameno(String userName) {
+		return rootUserDao.selectByName(userName);
+	}
+
+	/**
+	 * 根据昵称查找注册成功用户
 	 */
 	@Override
 	public User findByName(String userName) {
 		return rootUserDao.selectByUserName(userName);
 	}
-
-	/**
+    /**
 	 * 根据email查找用户
 	 */
 	@Override
@@ -128,7 +135,7 @@ public class UserServiceImpl implements UserService{
 				throw new OperationRepeaException("用户不存在");
 			}else {
 				int updateUser = rootUserDao.updateUser(user);
-				User rootUser = rootUserDao.selectByUserName(user.getUserName());
+				User rootUser = rootUserDao.selectByName(user.getUserName());
 				if(updateUser <= 0) {
 					throw new OperationFailedException("修改失败");
 				}else {
@@ -216,7 +223,7 @@ public class UserServiceImpl implements UserService{
 		user.setIsBlock(false);
 		user.setThirdAccessToken(StringUtil.getUUID());
 		user.setStatusCd("1000");
-		user.setUserType("2");
+		user.setUserType("4");
 		user.setAvatar("/resources/images/default-avatar.jpg");
 		user.setSignature("这家伙很懒，什么都没留下");
 		return save(user);
@@ -235,6 +242,9 @@ public class UserServiceImpl implements UserService{
 		rootUserDao.updateScore(score, userId);
 	}
 
+	@Transactional
+	@Override
+	public void updateUserType(String userName){ rootUserDao.updateUserType(userName); }
 	/**
 	 * 积分值
 	 */
@@ -273,6 +283,17 @@ public class UserServiceImpl implements UserService{
 		int totalRow = countAllForAdmin(username, email);
 		return new PageDataBody<>(list, pageNumber, pageSize, totalRow);
 	}
+
+    /**
+     * 根据类型查找用户
+     */
+    @Override
+    public PageDataBody<User> pageForAdminByUserType(String username, String email,Integer pageNumber, Integer pageSize) {
+        List<User> list = rootUserDao.selectByUserType(username, email, (pageNumber - 1) * pageSize, pageSize);
+        int totalRow = rootUserDao.countUserAll();
+        return new PageDataBody<>(list, pageNumber, pageSize, totalRow);
+    }
+
 
 	@Override
 	public int countAllForAdmin(String username, String email) {

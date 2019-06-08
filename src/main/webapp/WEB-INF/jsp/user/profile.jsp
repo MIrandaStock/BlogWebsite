@@ -26,7 +26,8 @@
     <div class="col-md-9">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="/">主页</a> / 个人设置
+                <a href="/" style="color: white;">主页</a>
+                <a href="/" style="color: white;">/ &nbsp;个人设置</a>
             </div>
             <div class="panel-body">
                 <form action="/user/setting/profile" method="post" id="userProfileForm" enctype="multipart/form-data">

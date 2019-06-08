@@ -12,11 +12,12 @@
 <body>
 	<div class="wrapper">
 		<jsp:include page="components/head.jsp"></jsp:include>
-		<div class="row">
+		<div class="row" style="margin-left:80px;margin-top: 40px; ">
 			<div class="col-md-9">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<a href="/">主页</a> / 注册
+						<a href="/" style="color: white">主页</a>
+						<a href="" style="color: white">/&nbsp;注册</a>
 					</div>
 					<div class="panel-body">
 						<form role="form" id="form" method="post">
@@ -34,7 +35,7 @@
 								<label for="email">邮箱</label> <input type="email"
 									class="form-control" id="email" name="email" placeholder="邮箱">
 							</div>
-							<button type="button" class="btn btn-primary" id="reg_btn">注册</button>
+							<button type="button" class="btn btn-primary" id="reg_btn" style="background-color: darkred;">注册</button>
 						</form>
 					</div>
 				</div>
@@ -48,6 +49,6 @@
 	<script src="/resources/js/jquery.js"></script>
 	<!-- 引入 Bootstrap -->
 	<script src="/resources/js/bootstrap.min.js"></script>
-  <script src="/resources/js/register.js"></script>
+	<script src="/resources/js/register.js"></script>
 </body>
 </html>

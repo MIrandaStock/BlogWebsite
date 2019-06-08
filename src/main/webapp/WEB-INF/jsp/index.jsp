@@ -4,7 +4,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Roothub</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入 Bootstrap -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +59,7 @@
                                         <a href="/user/${item.author}">${item.author}</a>
                                         <c:if test="${item.viewCount > 0}">
                                             <span class="hidden-sm hidden-xs">•</span>
-                                            <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>
+                                            <span class="hidden-sm hidden-xs">${item.viewCount}次浏览</span>
                                         </c:if>
 
                                         <!-- 评论数量 -->
@@ -87,58 +86,9 @@
         </div>
         <div class="col-md-3 hidden-sm hidden-xs">
             <div class="panel panel-default" id="session"></div>
-            <!-- 今日热议主题 -->
-            <div class="panel panel-default">
-                <div class="panel-heading"><span style="color: #ccc;">今日热议主题</span></div>
-                <table class="table" style="font-size: 14px;">
-                    <tbody>
-                    <c:forEach var="item" items="${findHot}">
-                        <tr>
-                            <c:if test="${fn:length(item.avatar) > 0}">
-                                <td width="24" valign="middle" align="center">
-                                    <img src="${item.avatar}"
-                                         class="avatar img-circle"
-                                         border="0" align="default"
-                                         style="max-width: 24px; max-height: 24px;">
-                                </td>
-                            </c:if>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${item.url != null}">
-                                        <a href="${item.url}">${item.title}</a>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a href="/topic/${item.topicId}">${item.title}</a>
-                                    </c:otherwise>
-                                </c:choose>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </div>
-            <!-- 最热标签 -->
-            <div class="panel panel-default">
-                <div class="panel-heading"><span style="color: #ccc;">热门节点</span></div>
-                <div class="panel-body">
-                    <div class="row">
-                        <c:forEach var="item" items="${nodeList2}">
-                            <div class="col-md-6" style="margin-bottom: 10px; padding-left: 10px;">
-                                    <%-- <a href="${item.url}">
-                                      <span>n/${item.nodeTitle}</span>
-                                    </a> --%>
-                                    <%-- <span class="text-muted">x ${item.number}</span> --%>
-                                <a href="${item.url}"><span
-                                        class="label label-primary text-muted">${item.nodeTitle}</span></a>
-                                <small class="excerpt text-muted" style="display: block; margin-top: 10px;"></small>
-                            </div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </div>
             <!-- 社区运行状况 -->
             <div class="panel panel-default">
-                <div class="panel-heading"><span style="color: #ccc;">社区运行状况</span></div>
+                <div class="panel-heading"><span style="color: white;">BLOG现行状况</span></div>
                 <div class="cell">
                     <table cellpadding="5" cellspacing="0" border="0" width="100%">
                         <tbody style="font-size: 14px;">
@@ -165,8 +115,23 @@
     <div class="line___F1WY0"></div>
     <div class="arrow___3UCwo"></div>
 </div>
+
 </div>
-<jsp:include page="components/foot.jsp"></jsp:include>
+<div id="container" style="position: relative;">
+    <br>
+    <p style="color: #778087;">
+        <strong>
+            <a href="/about" style="color: white;margin-left: 40px">关于我们</a>
+            &nbsp;
+        </strong>
+        <span class="pull-right">
+            <a href="/admin/login" target="_blank" style="color: white;margin-right: 40px">登录后台</a>&nbsp;&nbsp;
+        </span>
+    </p>
+    <p style="color: white;margin-left: 40px"><a data-v-2b9fe4cd="">©2019 BLOG</a></p>
+    <p style="color: white;margin-left: 40px">♥ Hope you can find your world here</p>
+</div>
+
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/index.js"></script>

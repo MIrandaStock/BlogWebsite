@@ -550,12 +550,23 @@ hr {
 }
 
 body {
-    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif
+    font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    background-image: url("../images/back7.jpg") ;
+    min-height: 100%;
 }
+
+html{
+    height: 100%;
+}
+
+form{
+    height: 100%;
+}
+
+
 
 .wrapper {
     width: 100%;
-    background-color: #e5e5e5;
     background-position-x: 50%;
     background-position-y: 0px;
     background-size: initial;
@@ -564,6 +575,8 @@ body {
     background-attachment: initial;
     background-origin: initial;
     background-clip: initial;
+    height: 80px;
+    bottom: 80px;
 }
 
 /* a��ǩ������״̬ */
@@ -1076,7 +1089,7 @@ img .avatar {
 }
 
 a {
-    color: #778087;
+    color: white;
     /* color:#4078c0; */
 }
 
@@ -1468,3 +1481,4 @@ a.node:active, a.node:link, a.node:visited {
 .layui-laypage a {
     color: #778087;
 }
+

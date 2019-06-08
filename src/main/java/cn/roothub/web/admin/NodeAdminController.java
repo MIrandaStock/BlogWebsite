@@ -15,6 +15,15 @@ import cn.roothub.dto.Result;
 import cn.roothub.entity.Node;
 import cn.roothub.exception.ApiAssert;
 import cn.roothub.service.NodeService;
+import cn.roothub.entity.User;
+import cn.roothub.service.UserService;
+
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+import cn.roothub.util.SendMailText;
 
 /**
  * <p></p>
@@ -27,19 +36,61 @@ public class NodeAdminController {
 
 	@Autowired
 	private NodeService nodeService;
-	
+
+	@Autowired
+	private UserService userService;
+
+
+
+
 	@RequiresPermissions("node:list")
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public String list(@RequestParam(value = "nodeTitle",required = false) String nodeTitle,
-					   @RequestParam(value = "p",defaultValue = "1") Integer p,Model model) {
-		if(StringUtils.isEmpty(nodeTitle)) nodeTitle = null;
-		PageDataBody<Node> page = nodeService.pageForAdmin(nodeTitle, p, 25);
-		model.addAttribute("page", page);
-		model.addAttribute("nodeTitle", nodeTitle);
+	public String list(String username, String email, @RequestParam(value = "p",defaultValue = "1") Integer p, Model model) {
+		if(StringUtils.isEmpty(username)) username = null;
+		if(StringUtils.isEmpty(email)) email = null;
+		model.addAttribute("username", username);
+		model.addAttribute("email", email);
 		model.addAttribute("p", p);
+		model.addAttribute("page", userService.pageForAdminByUserType(username, email, p, 25));
 		return "admin/node/list";
 	}
-	
+
+	/**
+	 * 通过用户申请
+	 * @param email
+	 * @return
+	 */
+
+	@RequestMapping(value = "/pass",method = RequestMethod.GET)
+	@ResponseBody
+	public Result<String> pass(@RequestParam("email") String email){
+		try{
+			SendMailText.sendEmail(email,"恭喜您成功通过注册申请，欢迎您使用本网站！");
+		}catch (Exception e){
+		}
+		User user=userService.findByEmail(email);
+		userService.updateUserType(user.getUserName());
+		return new Result<>(true, "已同意注册！");
+	}
+
+	/**
+	 * 拒绝用户注册申请
+	 * @param email
+	 * @return
+	 */
+
+	@RequestMapping(value = "/refuse",method = RequestMethod.GET)
+	@ResponseBody
+	public Result<String> refuse(@RequestParam("email") String email){
+		try{
+			SendMailText.sendEmail(email,"很遗憾您未能通过注册申请，您的注册申请信息将被清除，感谢您对我们的支持！");
+		}catch (Exception e){
+		}
+		User user=userService.findByEmail(email);
+		userService.deleteUserByName(user.getUserName());
+		return new Result<>(true, "已拒绝注册！");
+	}
+
 	@RequiresPermissions("node:edit")
 	@RequestMapping(value = "/edit",method = RequestMethod.GET)
 	public String edit(@RequestParam(value = "id") Integer id, Model model) {
@@ -47,7 +98,7 @@ public class NodeAdminController {
 		model.addAttribute("node", node);
 		return "admin/node/edit";
 	}
-	
+
 	@RequiresPermissions("node:edit")
 	@RequestMapping(value = "/edit",method = RequestMethod.POST)
 	@ResponseBody
@@ -60,7 +111,7 @@ public class NodeAdminController {
 		nodeService.update(nodeId, nodeTitle, avatarNormal, avatarLarge, nodeDesc);
 		return new Result<>(true, "更新成功");
 	}
-	
+
 	@RequiresPermissions("node:delete")
 	@RequestMapping(value = "/delete",method = RequestMethod.POST)
 	@ResponseBody

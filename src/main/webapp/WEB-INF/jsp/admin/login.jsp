@@ -9,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Roothub后台管理系统</title>
+    <title>BLOG 管理员系统</title>
     <link rel="icon" href="/resources/images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
@@ -46,14 +46,20 @@
         });
       }
     </script>
+    <style>
+      body{
+        background-image: url("back5.jpg");
+      }
+
+    </style>
   </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url("back5.jpg")">
   <div class="login-box">
     <div class="login-logo">
-      <a href="javascript:;"><b>Roothub</b>管理平台</a>
+      <a href="javascript:;"><b>BLOG</b>管理员端</a>
     </div>
-    <div class="login-box-body">
-      <p class="login-box-msg">Roothub 管理平台登录</p>
+      <div class="login-box-body">
+      <p class="login-box-msg">BLOG 管理员登录</p>
       <c:if test="${error != null}">
         <div class="text-red">${error}</div>
       </c:if>

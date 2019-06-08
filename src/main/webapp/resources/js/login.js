@@ -18,6 +18,7 @@ $(function(){
               data: {
                 username: $("#username").val(),
                 password: $("#password").val(),
+
               },
               success:function(data){
                 if(data.success != null && data.success == false){

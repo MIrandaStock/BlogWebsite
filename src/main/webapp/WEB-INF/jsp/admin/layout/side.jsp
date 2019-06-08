@@ -43,7 +43,7 @@
         <li>
           <a href="/admin/node/list">
             <i class="fa fa-tags"></i>
-            <span>节点</span>
+            <span>注册申请</span>
           </a>
         </li>
       </shiro:hasPermission>

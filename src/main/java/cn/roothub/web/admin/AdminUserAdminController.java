@@ -98,7 +98,7 @@ public class AdminUserAdminController {
 	 * @param avatar:头像
 	 * @param roleIds:角色
 	 * @return
-	 */
+			 */
 	@RequiresPermissions("admin_user:edit")
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody

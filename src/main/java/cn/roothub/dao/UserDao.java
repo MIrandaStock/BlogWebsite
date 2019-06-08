@@ -15,7 +15,7 @@ public interface UserDao {
 	 * @return
 	 */
 	List<User> selectAll(@Param("start") Integer start,@Param("limit") Integer limit);
-	
+
 	/**
 	 * 积分榜用户
 	 * @param score
@@ -31,12 +31,19 @@ public interface UserDao {
 	User selectByUserId(@Param("userId") Integer userId);
 	
 	/**
-	 * 通过用户昵称查询单个用户
+	 * 通过用户昵称查询单个用户(剔除注册未通过)
+	 * @param userName
+	 * @return
+	 */
+	User selectByName(@Param("userName") String userName);
+
+	/**
+	 * 通过用户昵称查询单个用户(包括注册未通过)
 	 * @param userName
 	 * @return
 	 */
 	User selectByUserName(@Param("userName") String userName);
-	
+
 	/**
 	 * 通过邮箱查询单个用户
 	 * @param email
@@ -157,7 +164,14 @@ public interface UserDao {
 	 * @return
 	 */
 	int updateScore(@Param("score")Integer score,@Param("userId")Integer userId);
-	
+
+	/**
+	 * 更新用户类型
+	 * @param userName：用户昵称
+	 * @return
+	 */
+	int updateUserType(@Param("userName")String userName);
+
 	/**
 	 * 更新积分
 	 * @param score:积分值
@@ -209,7 +223,19 @@ public interface UserDao {
 	 */
 	List<User> selectAllForAdmin(@Param("username") String username, @Param("email") String email, 
 			@Param("start") Integer start, @Param("limit") Integer limit);
-	
+
+	/**
+	 * 后台通过用户类型查询申请注册的用户
+	 * @param username:用户名
+	 * @param email:邮箱
+	 * @param start
+	 * @param limit
+	 * @return
+	 */
+	List<User> selectByUserType(@Param("username") String username, @Param("email") String email,
+								 @Param("start") Integer start, @Param("limit") Integer limit);
+
+
 	/**
 	 * 统计用户数量
 	 * @param username

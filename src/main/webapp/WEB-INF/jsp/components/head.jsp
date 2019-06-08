@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>BLOG</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入 Bootstrap -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -20,20 +20,22 @@
 </head>
 <body>
 <nav class="navbar navbar-default"
-     style="border-radius: 0; margin-bottom: 10px;">
+     style="border-radius: 0; ">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" style="font-weight: 700; font-size: 27px;" href="/">Roothub</a>
+            <a class="navbar-brand" style="font-weight: 700; font-size: 27px;" href="/">
+                <img src="../resources/images/logoblog.png">
+            </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse header-navbar">
-            <form class="navbar-form navbar-left hidden-xs hidden-sm"
+            <form class="navbar-form navbar-right hidden-xs hidden-sm"
                   role="search" action="/search" method="get" onsubmit="return checkSearch()">
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" name="s" value="" id="sea"
-                           style="width: 270px;" placeholder="回车搜索">
+                           style="width: 270px;" placeholder="请输入您要搜索的博文">
                 </div>
             </form>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-left searchmyself">
                 <li class="hidden-xs" id="shouye">
                     <a href="/">首页</a>
                 </li>
@@ -80,7 +82,7 @@
                         $("#loginuser").show();
                         $("#loginuser a").text(data.user);
                         $("#loginuser a").attr("href", "/user/" + data.user);
-                        
+
                         $("#shezhili").show();
                         $("#tuichuli").show();
                     }
