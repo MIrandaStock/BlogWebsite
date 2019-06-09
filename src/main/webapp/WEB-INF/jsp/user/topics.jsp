@@ -79,14 +79,12 @@
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/pagination2.js"></script>
-<script src="/resources/js/goTop.js"></script>
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
 <script src="/resources/js/login_info.js"></script>
 <script type="text/javascript">
 	$(function(){
-		/* var url = "/user/${user.userName}/topics?";
-		$(".pagination2").pagination("${topicPage.pageNumber}","${topicPage.totalPage}",10); */
+
 		 var count = ${topicPage.totalRow};//数据总量
 		 var limit = ${topicPage.pageSize};//每页显示的条数
 		 var url = "/user/topics?p=";//url

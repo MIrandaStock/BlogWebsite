@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>    
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ include file="../layout/header.jsp"%>
 <!-- 内容主体区域 -->
@@ -100,7 +99,7 @@
 	      success: function(data) {
 	        if (data.success === true) {
 	          //console.log(data.data);
-	          $(".form-group").append('<div class="upload-input" style="margin-top: 20px;"></>');
+	          $(".form-group").append('<div class="upload-input" style="margin-top: 20px;"></div>');
 	          for (var i = 0; i < data.data.length; i++) {
 	            $(".upload-input").append('<label>' + data.data[i].description + '</label><input type="text" name="' + data.data[i].key + '" id="' + data.data[i].key + '" value="' + data.data[i].value + '" class="form-control"/><br/>');
 	          }

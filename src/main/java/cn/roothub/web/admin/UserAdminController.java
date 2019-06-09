@@ -7,7 +7,6 @@ import cn.roothub.entity.User;
 import cn.roothub.service.ReplyService;
 import cn.roothub.service.TopicService;
 import cn.roothub.service.UserService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -48,7 +47,7 @@ public class UserAdminController {
      * @param model
      * @return
      */
-    @RequiresPermissions("user:list")
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(String username, String email, @RequestParam(value = "p", defaultValue = "1") Integer p, Model model) {
         if (StringUtils.isEmpty(username)) username = null;
@@ -69,7 +68,7 @@ public class UserAdminController {
      * @param id
      * @return
      */
-    @RequiresPermissions("user:delete")
+
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     @ResponseBody
     public Result<String> delete(Integer id) {

@@ -80,7 +80,7 @@
 <jsp:include page="../components/foot.jsp"></jsp:include>
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-<script src="/resources/js/goTop.js"></script>
+
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
 <script src="/resources/js/formatDate.js"></script>

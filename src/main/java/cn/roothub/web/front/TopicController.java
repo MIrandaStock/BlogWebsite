@@ -26,8 +26,7 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private UserService rootUserService;
 	@Autowired
 	private TopicService rootTopicService;
-	@Autowired
-	private NodeTabService rootSectionService;
+
 	@Autowired
 	private ReplyService rootReplyService;
 	@Autowired
@@ -36,8 +35,6 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private NoticeService rootNoticeService;
 	@Autowired
 	private TabService tabService;
-	@Autowired
-	private NodeService nodeService;
 	@Autowired
 	private TopicService topicService;
 	
@@ -121,9 +118,7 @@ private Logger logger = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping(value = "/topic/create", method = RequestMethod.GET)
 	private String create(String n,HttpServletRequest request){
 		List<Tab> tabList = tabService.selectAll();
-		List<Node> nodeList = nodeService.findAll(null, null);
 		request.setAttribute("tabList", tabList);
-		request.setAttribute("nodeList", nodeList);
 		request.setAttribute("node", n);
 		return "topic/create";
 	}

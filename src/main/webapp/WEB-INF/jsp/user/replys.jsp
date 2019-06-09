@@ -57,7 +57,6 @@
 <script src="/resources/js/bootstrap.min.js"></script>
 <!-- 分页 -->
 <script src="/resources/js/pagination2.js"></script>
-<script src="/resources/js/goTop.js"></script>
 <script type="text/javascript">
 	var url = "/user/${user.userName}/replys?";
 	$(".pagination2").pagination("${replyPage.pageNumber}","${replyPage.totalPage}",10);

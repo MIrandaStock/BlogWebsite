@@ -1,6 +1,11 @@
 package cn.roothub.web.front;
 
-import javax.servlet.http.HttpServletRequest;
+import cn.roothub.config.SiteConfig;
+import cn.roothub.entity.User;
+import cn.roothub.service.*;
+import cn.roothub.util.Base64Util;
+import cn.roothub.util.CookieAndSessionUtil;
+import cn.roothub.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +13,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 
-import cn.roothub.config.SiteConfig;
-import cn.roothub.entity.User;
-import cn.roothub.service.CollectService;
-import cn.roothub.service.NoticeService;
-import cn.roothub.service.ReplyService;
-import cn.roothub.service.NodeTabService;
-import cn.roothub.service.TopicService;
-import cn.roothub.service.UserService;
-import cn.roothub.util.Base64Util;
-import cn.roothub.util.CookieAndSessionUtil;
-import cn.roothub.util.JsonUtil;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class BaseController {
@@ -29,8 +24,6 @@ public class BaseController {
 	private UserService rootUserService;
 	@Autowired
 	private TopicService rootTopicService;
-	@Autowired
-	private NodeTabService rootSectionService;
 	@Autowired
 	private NoticeService rootNoticeService;
 	@Autowired

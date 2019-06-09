@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp" %>
 <!-- 内容主体区域 -->
@@ -22,10 +21,8 @@
         <div class="box box-info">
             <div class="box-header with-border">
                 <h3 class="box-title">权限列表</h3>
-                <shiro:hasPermission name="permission:add">
                     <a class="btn btn-xs btn-primary pull-right"
                        onclick="addParentPermission()" href="javascript:;">添加父权限</a>
-                </shiro:hasPermission>
             </div>
             <!-- /.box-header -->
             <div class="box-body" style="padding: 0px;">
@@ -43,10 +40,8 @@
                     <div class="layui-tab-content">
                         <c:forEach items="${permissionMap}" var="permissions" varStatus="permissionsStatus">
                             <div id="permission-tab-item-${permissionsStatus.index}" class="layui-tab-item">
-                                <shiro:hasPermission name="permission:add">
                                     <a class="btn btn-xs btn-primary pull-right"
                                        onclick="addPermission('${permissions.key}')" href="javascript:;">添加子权限</a>
-                                </shiro:hasPermission>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-responsive">
                                         <thead>
@@ -62,16 +57,12 @@
                                                 <td>${permission.permissionName}</td>
                                                 <td>${permission.permissionValue}</td>
                                                 <td>
-                                                    <shiro:hasPermission name="permission:edit">
                                                         <button
                                                                 onclick="editPermission(${permission.permissionId}, '${permission.permissionName}', '${permission.permissionValue}', ${permission.pid})"
                                                                 class="btn btn-xs btn-warning">编辑
                                                         </button>
-                                                    </shiro:hasPermission>
-                                                    <shiro:hasPermission name="permission:delete">
                                                         <a href="javascript:if(confirm('确定要删除吗？')) location.href='/admin/permission/delete?id=${permission.permissionId}'"
                                                            class="btn btn-xs btn-danger">删除</a>
-                                                    </shiro:hasPermission></td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>

@@ -1,9 +1,9 @@
 package cn.roothub.web.admin;
 
-import java.util.Date;
-import java.util.Map;
-
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import cn.roothub.dto.Result;
+import cn.roothub.entity.Permission;
+import cn.roothub.exception.ApiAssert;
+import cn.roothub.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.roothub.dto.Result;
-import cn.roothub.entity.Permission;
-import cn.roothub.exception.ApiAssert;
-import cn.roothub.service.PermissionService;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * <p></p>
@@ -28,7 +26,7 @@ public class PermissionAdminController {
 	@Autowired
 	private PermissionService permissionService;
 	
-	@RequiresPermissions("permission:list")
+
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String list(Model model) {
 		Map<String, Object> permissionMap = permissionService.permissionMap();
@@ -45,7 +43,7 @@ public class PermissionAdminController {
 	 * @param value: 权限值
 	 * @return
 	 */
-	@RequiresPermissions("permission:add")
+
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
 	@ResponseBody
 	public Result<String> add(Integer pid,String pname,Integer id,String name,String value){
@@ -64,7 +62,7 @@ public class PermissionAdminController {
 	 * @param value: 权限值
 	 * @return
 	 */
-	@RequiresPermissions("permission:edit")
+
 	@RequestMapping(value = "/edit",method = RequestMethod.POST)
 	@ResponseBody
 	public Result<String> edit(Integer pid,String pname,Integer id,String name,String value){
@@ -80,7 +78,7 @@ public class PermissionAdminController {
 		return new Result<>(true, "编辑权限成功");
 	}
 	
-	@RequiresPermissions("permission:delete")
+
 	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	public String delete(Integer id,String name) {
 		permissionService.remove(id, name);

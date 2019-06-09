@@ -1,10 +1,9 @@
 package cn.roothub.dao;
 
-import java.util.List;
+import cn.roothub.entity.User;
 import org.apache.ibatis.annotations.Param;
 
-import cn.roothub.entity.User;
-import cn.roothub.entity.Top100;
+import java.util.List;
 
 public interface UserDao {
 
@@ -16,16 +15,10 @@ public interface UserDao {
 	 */
 	List<User> selectAll(@Param("start") Integer start,@Param("limit") Integer limit);
 
-	/**
-	 * 积分榜用户
-	 * @param score
-	 * @return
-	 */
-	List<Top100> selectByScore(@Param("limit") Integer limit);
+
 	
 	/**
 	 * 通过用户ID查询单个用户
-	 * @param UserId
 	 * @return
 	 */
 	User selectByUserId(@Param("userId") Integer userId);

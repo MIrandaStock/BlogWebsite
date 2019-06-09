@@ -133,12 +133,10 @@
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/wangEditor/wangEditor.min.js"></script>
-<script src="/resources/js/goTop.js"></script>
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
 <script src="/resources/js/login_info.js"></script>
 <script src="/resources/js/formatDate.js"></script>
-<script src="/resources/js/topic/detail.js"></script>
 <script src="/resources/js/topic/other-topic.js"></script>
 <script type="text/javascript">
 	/* 获取登录信息 */

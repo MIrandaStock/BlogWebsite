@@ -43,7 +43,6 @@
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/wangEditor/wangEditor.min.js"></script>
-<!-- <script src="/resources/js/topic/node.js"></script> -->
 <script type="text/javascript">
     $(function () {
         var E = window.wangEditor;

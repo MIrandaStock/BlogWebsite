@@ -95,7 +95,7 @@
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
-<script src="/resources/js/goTop.js"></script>
+
 <script src="/resources/js/formatDate.js"></script>
 <script src="/resources/js/search/search.js"></script>
 <script type="text/javascript">

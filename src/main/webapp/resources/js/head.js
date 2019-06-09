@@ -4,7 +4,6 @@ $(function(){
         url:"/session",
         dataType:"json",
         success:function(data){
-          //console.log(JSON.stringify(data));
           if(data.success != null && data.success == true){
             $("#loginuser").show();
             $("#loginuser a").text(data.data.userName);

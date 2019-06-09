@@ -3,7 +3,6 @@ package cn.roothub.service.impl;
 import cn.roothub.dao.UserDao;
 import cn.roothub.dto.PageDataBody;
 import cn.roothub.dto.UserExecution;
-import cn.roothub.entity.Top100;
 import cn.roothub.entity.User;
 import cn.roothub.enums.InsertUserEnum;
 import cn.roothub.enums.UpdateUserEnum;
@@ -103,13 +102,6 @@ public class UserServiceImpl implements UserService{
 		return rootUserDao.selectByEmailAndPassword(email, password);
 	}
 
-	/**
-	 * 积分榜用户
-	 */
-	@Override
-	public List<Top100> scores(Integer limit) {
-		return rootUserDao.selectByScore(limit);
-	}
 
 	/**
 	 * 分页查询所有用户，倒叙

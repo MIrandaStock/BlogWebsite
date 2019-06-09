@@ -1,6 +1,9 @@
 package cn.roothub.web.admin;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import cn.roothub.dto.Result;
+import cn.roothub.entity.User;
+import cn.roothub.service.UserService;
+import cn.roothub.util.SendMailText;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,32 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.roothub.dto.PageDataBody;
-import cn.roothub.dto.Result;
-import cn.roothub.entity.Node;
-import cn.roothub.exception.ApiAssert;
-import cn.roothub.service.NodeService;
-import cn.roothub.entity.User;
-import cn.roothub.service.UserService;
 
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
-import cn.roothub.util.SendMailText;
-
-/**
- * <p></p>
- * @author: miansen.wang
- * @date: 2019-04-03
- */
 @Controller
 @RequestMapping("/admin/node")
 public class NodeAdminController {
-
-	@Autowired
-	private NodeService nodeService;
 
 	@Autowired
 	private UserService userService;
@@ -43,7 +24,7 @@ public class NodeAdminController {
 
 
 
-	@RequiresPermissions("node:list")
+
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String list(String username, String email, @RequestParam(value = "p",defaultValue = "1") Integer p, Model model) {
 		if(StringUtils.isEmpty(username)) username = null;
@@ -91,33 +72,4 @@ public class NodeAdminController {
 		return new Result<>(true, "已拒绝注册！");
 	}
 
-	@RequiresPermissions("node:edit")
-	@RequestMapping(value = "/edit",method = RequestMethod.GET)
-	public String edit(@RequestParam(value = "id") Integer id, Model model) {
-		Node node = nodeService.findById(id);
-		model.addAttribute("node", node);
-		return "admin/node/edit";
-	}
-
-	@RequiresPermissions("node:edit")
-	@RequestMapping(value = "/edit",method = RequestMethod.POST)
-	@ResponseBody
-	public Result<String> edit(Integer nodeId, String nodeTitle, String avatarNormal, String avatarLarge, String nodeDesc) {
-		ApiAssert.notNull(nodeId, "节点ID不能为空");
-		ApiAssert.notEmpty(nodeTitle, "节点名称不能为空");
-		if(StringUtils.isEmpty(avatarNormal)) avatarNormal = null;
-		if(StringUtils.isEmpty(avatarLarge)) avatarLarge = null;
-		if(StringUtils.isEmpty(nodeDesc)) nodeDesc = null;
-		nodeService.update(nodeId, nodeTitle, avatarNormal, avatarLarge, nodeDesc);
-		return new Result<>(true, "更新成功");
-	}
-
-	@RequiresPermissions("node:delete")
-	@RequestMapping(value = "/delete",method = RequestMethod.POST)
-	@ResponseBody
-	public Result<String> delete(Integer id){
-		ApiAssert.notNull(id, "节点ID不能为空");
-		nodeService.deleteById(id);
-		return new Result<>(true, "删除成功");
-	}
 }

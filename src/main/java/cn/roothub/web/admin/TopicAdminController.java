@@ -6,11 +6,9 @@ import cn.roothub.dto.Result;
 import cn.roothub.entity.Reply;
 import cn.roothub.entity.Topic;
 import cn.roothub.exception.ApiAssert;
-import cn.roothub.service.NodeService;
 import cn.roothub.service.ReplyService;
 import cn.roothub.service.TopicService;
 import cn.roothub.service.UserService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +35,6 @@ public class TopicAdminController {
 	@Autowired
 	private SiteConfig siteConfig;
 	@Autowired
-	private NodeService nodeService;
-	@Autowired
 	private ReplyService replyService;
 	@Autowired
 	private UserService userService;
@@ -52,7 +48,7 @@ public class TopicAdminController {
 	 * @param p
 	 * @return
 	 */
-	@RequiresPermissions("topic:list")
+
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String list(String startDate, String endDate,String author, Model model,@RequestParam(defaultValue = "1") Integer p) {
 		if (StringUtils.isEmpty(startDate)) startDate = null;
@@ -71,7 +67,7 @@ public class TopicAdminController {
 	 * @param id
 	 * @return
 	 */
-	@RequiresPermissions("topic:top")
+
 	@RequestMapping(value = "/top",method = RequestMethod.GET)
 	@ResponseBody
 	public Result<String> top(@RequestParam("id") Integer id){
@@ -87,7 +83,7 @@ public class TopicAdminController {
 	 * @param id
 	 * @return
 	 */
-	@RequiresPermissions("topic:good")
+
 	@RequestMapping(value = "/good",method = RequestMethod.GET)
 	@ResponseBody
 	public Result<String> good(@RequestParam("id") Integer id){
@@ -102,7 +98,7 @@ public class TopicAdminController {
 	/**
 	 * 屏蔽或者取消屏蔽
 	 */
-//	@RequiresPermissions("topic:showStatus")
+
 	@RequestMapping(value = "/showStatus",method = RequestMethod.GET)
 	@ResponseBody
 	public Result<String> showStatus(@RequestParam("id") Integer id){
@@ -125,7 +121,7 @@ public class TopicAdminController {
 	 * @param id
 	 * @return
 	 */
-	@RequiresPermissions("topic:delete")
+
 	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	@ResponseBody
 	public Result<String> delete(@RequestParam("id") Integer id){
@@ -143,7 +139,7 @@ public class TopicAdminController {
 	 * @param model
 	 * @return
 	 */
-	@RequiresPermissions("topic:edit")
+
 	@RequestMapping(value = "/edit",method = RequestMethod.GET)
 	public String edit(@RequestParam("id") Integer id,Model model) {
 		model.addAttribute("topic", topicService.findById(id));
@@ -158,7 +154,7 @@ public class TopicAdminController {
 	 * @param content
 	 * @return
 	 */
-	@RequiresPermissions("topic:edit")
+
 	@RequestMapping(value = "/edit",method = RequestMethod.POST)
 	@ResponseBody
 	public Result<String> edit(@RequestParam("id") Integer id,@RequestParam("title") String title,@RequestParam("content") String content){

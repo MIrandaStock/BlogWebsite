@@ -2,7 +2,10 @@ package cn.roothub.web.admin;
 
 import cn.roothub.dto.Result;
 import cn.roothub.entity.AdminUser;
-import cn.roothub.service.*;
+import cn.roothub.service.AdminUserService;
+import cn.roothub.service.ReplyService;
+import cn.roothub.service.TopicService;
+import cn.roothub.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author miansen.wang
@@ -31,8 +36,6 @@ public class IndexAdminController {
     private ReplyService replyService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private NodeService nodeService;
 
     // 后台首页
     @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -43,8 +46,6 @@ public class IndexAdminController {
         model.addAttribute("comment_count", replyService.countToday());
         // 查询当天新增用户
         model.addAttribute("user_count", userService.countToday());
-        //查询当天新增节点
-        model.addAttribute("node_count", nodeService.countToday());
         return "/admin/index";
     }
 
@@ -60,7 +61,11 @@ public class IndexAdminController {
 
     // 后台登录处理
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String username, String password, @RequestParam(defaultValue = "0") Boolean rememberMe, Model model) {
+    public String login(String username, String password, @RequestParam(defaultValue = "0") Boolean rememberMe, Model model, HttpServletRequest request) {
+//        AdminUser adminUser=adminUserService.getByName(username);
+//        ApiAssert.notNull(adminUser, "用户不存在");
+//        ApiAssert.isTrue(new BCryptPasswordEncoder().matches(password, adminUser.getPassword()), "密码不正确");
+
         try {
             // 添加用户认证信息
             Subject subject = SecurityUtils.getSubject();

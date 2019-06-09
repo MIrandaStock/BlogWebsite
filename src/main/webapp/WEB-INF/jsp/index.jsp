@@ -52,7 +52,7 @@
                                             <span class="label label-primary">置顶</span> <span>•</span>
                                         </c:if>
                                         <c:if test="${item.good}">
-                                            <span class="label label-success">精华</span> <span>•</span>
+                                            <span class="label label-success">热文</span> <span>•</span>
                                         </c:if>
                                         <a href="/user/${item.author}">${item.author}</a>
                                         <c:if test="${item.viewCount > 0}">
@@ -109,10 +109,7 @@
         </div>
     </div>
 </div>
-<div id="back2Top" class="backTop___6Q-ki" style="display:none">
-    <div class="line___F1WY0"></div>
-    <div class="arrow___3UCwo"></div>
-</div>
+
 
 </div>
 <div id="container" style="position: relative;">
@@ -123,7 +120,7 @@
             &nbsp;
         </strong>
         <span class="pull-right">
-            <a href="/admin/login" target="_blank" style="color: white;margin-right: 40px">登录后台</a>&nbsp;&nbsp;
+            <a href="/admin/login" target="_blank" style="color: white;margin-right: 40px">登录后台测试</a>&nbsp;&nbsp;
         </span>
     </p>
     <p style="color: white;margin-left: 40px"><a data-v-2b9fe4cd="">©2019 BLOG</a></p>
