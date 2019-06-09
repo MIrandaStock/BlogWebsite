@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>    
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ include file="../layout/header.jsp"%>
 <!-- 内容主体区域 -->
@@ -50,7 +51,12 @@
               <td>${user.score}</td>
               <td><fmt:formatDate type="both" value="${user.createDate}" /></td>
               <td>
+                  <shiro:hasPermission name="user:edit">
+                  	<a href="/admin/user/edit?id=${user.userId}" class="btn btn-xs btn-warning">编辑</a>
+                  </shiro:hasPermission>
+                  <shiro:hasPermission name="user:edit">
                   	<button onclick="actionBtn('${user.userId}','delete',this)" class="btn btn-xs btn-danger">删除</button>
+                  </shiro:hasPermission>
                     <button onclick="actionBtn('${user.userId}','blacklist',this)" class="btn btn-xs btn-danger">
                       <c:choose>
                         <c:when test="${user.isBlock}"> 取消拉黑</c:when>

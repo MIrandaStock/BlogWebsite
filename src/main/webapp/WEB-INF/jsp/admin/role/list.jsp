@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>    
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ include file="../layout/header.jsp"%>
 <!-- 内容主体区域 -->
@@ -20,7 +21,9 @@
     <div class="box box-info">
       <div class="box-header with-border">
         <h3 class="box-title">角色列表</h3>
+        <shiro:hasPermission name="role:add">
           <a href="/admin/role/add" class="btn btn-xs btn-primary pull-right">添加</a>
+        </shiro:hasPermission>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -40,8 +43,12 @@
               <td>${role.roleName}</td>
               <td><fmt:formatDate type="both" value="${role.createDate}" /></td>
               <td>
+                <shiro:hasPermission name="role:edit">
                   <a href="/admin/role/edit?id=${role.roleId}" class="btn btn-xs btn-warning">编辑</a>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="role:delete">
                   <a href="javascript:if(confirm('确定要删除吗？')) location.href='/admin/role/delete?id=${role.roleId}'" class="btn btn-xs btn-danger">删除</a>
+                </shiro:hasPermission>
               </td>
             </tr>
           </c:forEach>

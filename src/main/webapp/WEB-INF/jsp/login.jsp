@@ -12,7 +12,7 @@
 <body>
   <div class="wrapper">
     <jsp:include page="components/head.jsp"></jsp:include>
-    <div class="row" style="margin-left:80px;margin-top: 40px; ">
+    <div class="row" style="margin-left:80px;margin-top: 40px;height: 180px; ">
       <div class="col-md-9">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -41,8 +41,21 @@
   </div>
  </div>
 </div>
+  <div id="container" style="position: absolute">
+    <br>
+    <p style="color: #778087;">
+      <strong>
+        <a href="/about" style="color: white;margin-left: 40px">关于我们</a>
+        &nbsp;
+      </strong>
+      <span class="pull-right">
+            <a href="/admin/login" target="_blank" style="color: white;margin-right: 40px">登录后台</a>&nbsp;&nbsp;
+        </span>
+    </p>
+    <p style="color: white;margin-left: 40px"><a data-v-2b9fe4cd="">©2019 BLOG</a></p>
+    <p style="color: white;margin-left: 40px">♥ Hope you can find your world here</p>
+  </div>
 
-  <jsp:include page="components/foot.jsp"></jsp:include>
   <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
   <script src="/resources/js/jquery.js"></script>
   <!-- 引入 Bootstrap -->

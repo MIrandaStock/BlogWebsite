@@ -16,10 +16,10 @@
 </div>
 <div class="wrapper">
     <jsp:include page="../components/head.jsp"></jsp:include>
-    <div class="row">
+    <%--<div class="row" style="margin-left: 140px;">--%>
         <!-- 小屏幕显示 -->
-        <div class="col-md-9">
-            <div class="box">
+        <div class="col-md-3"  >
+            <div class="box" style="float: left;">
                 <div class="cell">
                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
                         <tbody>
@@ -35,12 +35,11 @@
                                     <div class="fr">
                                         <button class="btn btn-follow" onclick="save()" id="follow">加入特别关注</button>
                                         <div class="sep10"></div>
-                                        <button class="btn btn-warning">Block</button>
                                     </div>
                                 </c:if>
                                 <h1 title="${user.userId}" id="user_id" class="user_id">${user.userName}</h1>
                                 <span class="gray" style="font-size: 14px;">
-                                    Roothub 第 ${user.userId} 号会员，加入于 <fmt:formatDate type="both" value="${user.createDate}"/>
+                                    BLOG于 <fmt:formatDate type="both" value="${user.createDate}"/>迎来我们的第${user.userId}位小伙伴
                                     <div class="sep5"></div>
                                 </span>
                             </td>
@@ -51,22 +50,25 @@
                 </div>
             </div>
             <div class="sep20"></div>
-            <div class="panel panel-default">
-                <div class="cell_tabs">
-                    <div class="fl">
-                        <img src="${user.avatar}" width="24" style="border-radius: 24px; margin-top: -2px;" border="0">
-                    </div>
-                    <%--href=”javascript:void(0);”这个的含义是，让超链接去执行一个js函数，而不是去跳转到一个地址--%>
-                    <a href="javascript:void(0);" onclick="topicList()" class="cell_tab_current">主题</a>
-                    <a href="javascript:void(0);" onclick="replyList()" class="cell_tab">评论</a>
-                    <a href="javascript:void(0);" onclick="collectList()" class="cell_tab">收藏</a>
-                    <a href="javascript:void(0);" onclick="followList()" class="cell_tab">关注</a>
-                    <a href="javascript:void(0);" onclick="fansList()" class="cell_tab">粉丝</a>
-                    <%--<a href="javascript:void(0);" onclick="topicQnaList()" class="cell_tab">提问</a></div>--%>
-                    <a href="javascript:void(0);" onclick="shield()" class="cell_tab">被屏蔽</a></div>
-                <div class="itemList"></div>
-            </div>
+
+    </div>
+    <div class="col-md-9">
+        <div class="panel panel-default" style="min-height: 500px;">
+            <div class="cell_tabs">
+                <div class="fl">
+                    <img src="${user.avatar}" width="24" style="border-radius: 24px; margin-top: -2px;" border="0">
+                </div>
+                <%--href=”javascript:void(0);”这个的含义是，让超链接去执行一个js函数，而不是去跳转到一个地址--%>
+                <a href="javascript:void(0);" onclick="topicList()" class="cell_tab_current">主题</a>
+                <a href="javascript:void(0);" onclick="replyList()" class="cell_tab">评论</a>
+                <a href="javascript:void(0);" onclick="collectList()" class="cell_tab">收藏</a>
+                <a href="javascript:void(0);" onclick="followList()" class="cell_tab">关注</a>
+                <a href="javascript:void(0);" onclick="fansList()" class="cell_tab">粉丝</a>
+                <%--<a href="javascript:void(0);" onclick="topicQnaList()" class="cell_tab">提问</a></div>--%>
+                <a href="javascript:void(0);" onclick="shield()" class="cell_tab">被屏蔽</a></div>
+            <div class="itemList"></div>
         </div>
+    </div>
     </div>
 </div>
 <div id="back2Top" class="backTop___6Q-ki" style="display:none">
@@ -77,6 +79,7 @@
 <jsp:include page="../components/foot.jsp"></jsp:include>
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/goTop.js"></script>
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
 <script src="/resources/js/user/detail.js"></script>

@@ -48,6 +48,8 @@
 			  <c:if test="${item.good}">
 			  <span class="label label-primary">精华</span> <span>•</span>
 			  </c:if>
+			  	<a href="/node/${item.nodeSlug}" class="node">${item.nodeTitle}</a>
+			  	<span>•</span>
                 <strong><a href="/user/${item.author}">${item.author}</a></strong>
                 <span class="hidden-sm hidden-xs">•</span>
                 <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>
@@ -95,7 +97,7 @@
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
-
+<script src="/resources/js/goTop.js"></script>
 <script src="/resources/js/formatDate.js"></script>
 <script src="/resources/js/search/search.js"></script>
 <script type="text/javascript">

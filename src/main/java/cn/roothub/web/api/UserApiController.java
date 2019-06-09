@@ -4,6 +4,7 @@ import cn.roothub.config.SiteConfig;
 import cn.roothub.dto.PageDataBody;
 import cn.roothub.dto.Result;
 import cn.roothub.entity.ReplyAndTopicByName;
+import cn.roothub.entity.Top100;
 import cn.roothub.entity.Topic;
 import cn.roothub.entity.User;
 import cn.roothub.exception.ApiAssert;
@@ -191,7 +192,15 @@ public class UserApiController extends BaseController{
 		}
 	}
 	
-
+	/**
+	 * Top100积分榜
+	 * @return
+	 */
+	@RequestMapping(value = "/api/user/top100",method = RequestMethod.GET)
+	private Result<List> top100(@RequestParam(value = "limit",defaultValue = "100")Integer limit){
+		List<Top100> scores = userService.scores(limit);
+		return new Result<List>(true, scores);
+	}
 	
 	/**
 	 * 用户的登录信息
@@ -218,7 +227,7 @@ public class UserApiController extends BaseController{
 			map.put("countFollow", countFollow);
 			map.put("countNotReadNotice", countNotReadNotice);
 			map.put("countScore", countScore);
-			return new Result<>(true, map);
+			return new Result<Map>(true, map);
 		}
 	}
 	

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp" %>
 <!-- 内容主体区域 -->
@@ -32,6 +33,24 @@
                             <label for="editor">内容</label>
                             <div id="editor" style="margin-bottom: 10px;"></div>
                         </div>
+                        <c:if test="${fn:length(nodes) > 0}">
+                            <div class="form-group">
+                                <label for="node">节点</label>
+                                <select id="node" class="form-control" name="node">
+                                    <c:forEach var="item" items="${nodes}" varStatus="status">
+                                        <c:choose>
+                                            <c:when test="${topic.nodeTitle == item.nodeTitle}">
+                                                <option value="${item.nodeTitle}"
+                                                        selected="selected">${item.nodeTitle}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${item.nodeTitle}">${item.nodeTitle}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                        </c:if>
                         <button type="submit" class="btn btn-primary btn-sm">更新话题</button>
                     </div>
                 </form>
@@ -68,10 +87,14 @@
                 if (confirm("确定编辑此话题吗？")) {
                     var title = $("#title").val();
                     var contentHtml = editor.txt.html();
+                    var nodeTitle = $("#node option:selected").val();
                     if (!title || title.length > 120) {
                         alert('请输入标题，且最大长度在120个字符以内');
                         return false;
-                    }  else {
+                    } else if (!nodeTitle) {
+                        alert('请选择一个节点');
+                        return false;
+                    } else {
                         $.ajax({
                             url: '/admin/topic/edit',
                             type: 'post',
@@ -82,6 +105,7 @@
                                 id: ${topic.topicId},
                                 title: title,
                                 content: contentHtml,
+                                nodeTitle: nodeTitle
                             },
                             success: function (data) {
                                 if (data.success != null && data.success == true) {

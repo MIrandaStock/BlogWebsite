@@ -52,7 +52,7 @@
                                             <span class="label label-primary">置顶</span> <span>•</span>
                                         </c:if>
                                         <c:if test="${item.good}">
-                                            <span class="label label-success">热文</span> <span>•</span>
+                                            <span class="label label-success">精华</span> <span>•</span>
                                         </c:if>
                                         <a href="/user/${item.author}">${item.author}</a>
                                         <c:if test="${item.viewCount > 0}">
@@ -82,7 +82,7 @@
                 <div class="panel-footer" id="paginate"></div>
             </div>
         </div>
-        <div class="col-md-3 hidden-sm hidden-xs">
+        <div class="col-md-3 hidden-sm hidden-xs" >
             <div class="panel panel-default" id="session"></div>
             <!-- 社区运行状况 -->
             <div class="panel panel-default">
@@ -109,23 +109,13 @@
         </div>
     </div>
 </div>
-
+<div id="back2Top" class="backTop___6Q-ki" style="display:none">
+    <div class="line___F1WY0"></div>
+    <div class="arrow___3UCwo"></div>
+</div>
 
 </div>
-<div id="container" style="position: relative;">
-    <br>
-    <p style="color: #778087;">
-        <strong>
-            <a href="/about" style="color: white;margin-left: 40px">关于我们</a>
-            &nbsp;
-        </strong>
-        <span class="pull-right">
-            <a href="/admin/login" target="_blank" style="color: white;margin-right: 40px">登录后台测试</a>&nbsp;&nbsp;
-        </span>
-    </p>
-    <p style="color: white;margin-left: 40px"><a data-v-2b9fe4cd="">©2019 BLOG</a></p>
-    <p style="color: white;margin-left: 40px">♥ Hope you can find your world here</p>
-</div>
+<jsp:include page="components/foot.jsp"></jsp:include>
 
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>

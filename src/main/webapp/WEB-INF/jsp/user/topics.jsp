@@ -16,10 +16,12 @@
 <body>
   <div class="wrapper">
     <jsp:include page="../components/head.jsp"></jsp:include>
-    <div class="row">
+    <div class="row" >
       <div class="col-md-9">
-        <div class="panel panel-default">
-          <div class="panel-heading"><a href="/">主页</a> / ${user.userName}创建的话题</div>
+        <div class="panel panel-default" style="min-height: 400px">
+          <div class="panel-heading"><a href="/">主页</a>
+          <a href="" style="color: white">/&nbsp;${user.userName}创建的话题</a>
+          </div>
           <c:forEach var="item" items="${topicPage.list}">
           <div class="panel-body paginate-bot" style="border-bottom: 1px solid #e2e2e2;">
             <div class="media">
@@ -42,9 +44,11 @@
 			      <c:if test="${item.good}">
 			      <span class="label label-primary">精华</span> <span>•</span>
 			      </c:if>
+			      <%--<span><a href="/node/${item.nodeSlug}" class="node">${item.nodeTitle}</a></span>--%>
+			      <%--<span>•</span>--%>
                   <strong><a href="/user/${item.author}">${item.author}</a></strong>
                   <span class="hidden-sm hidden-xs">•</span>
-                  <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>
+                  <span class="hidden-sm hidden-xs">${item.viewCount}次浏览</span>
                   <!-- <span>•</span> -->
                   <%-- <span class="hidden-sm hidden-xs"><a href="/topic/${item.topicId}">${item.replyCount}个评论</a></span> --%>
                   <span class="hidden-sm hidden-xs">•</span>           
@@ -79,12 +83,14 @@
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/js/pagination2.js"></script>
+<script src="/resources/js/goTop.js"></script>
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
 <script src="/resources/js/login_info.js"></script>
 <script type="text/javascript">
 	$(function(){
-
+		/* var url = "/user/${user.userName}/topics?";
+		$(".pagination2").pagination("${topicPage.pageNumber}","${topicPage.totalPage}",10); */
 		 var count = ${topicPage.totalRow};//数据总量
 		 var limit = ${topicPage.pageSize};//每页显示的条数
 		 var url = "/user/topics?p=";//url

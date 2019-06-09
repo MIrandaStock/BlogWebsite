@@ -1,13 +1,9 @@
 package cn.roothub.web.admin;
 
-import cn.roothub.dto.PageDataBody;
-import cn.roothub.dto.Result;
-import cn.roothub.entity.AdminUser;
-import cn.roothub.entity.Role;
-import cn.roothub.exception.ApiAssert;
-import cn.roothub.service.AdminUserService;
-import cn.roothub.service.RoleService;
-import com.alibaba.fastjson.JSON;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
-import java.util.Map;
+import com.alibaba.fastjson.JSON;
+import cn.roothub.dto.PageDataBody;
+import cn.roothub.dto.Result;
+import cn.roothub.entity.AdminUser;
+import cn.roothub.entity.Role;
+import cn.roothub.exception.ApiAssert;
+import cn.roothub.service.AdminUserService;
+import cn.roothub.service.RoleService;
 
 /**
  * <p>
@@ -37,7 +38,7 @@ public class AdminUserAdminController {
 	@Autowired
 	private RoleService roleService;
 
-
+	@RequiresPermissions("admin_user:list")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model modle, @RequestParam(defaultValue = "1") Integer p) {
 		PageDataBody<AdminUser> page = adminUserService.pageRoles(p, 25);
@@ -46,7 +47,7 @@ public class AdminUserAdminController {
 		return "admin/admin_user/list";
 	}
 
-
+	@RequiresPermissions("admin_user:add")
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String add(Model model) {
 		PageDataBody<Role> page = roleService.page(1, 100);
@@ -62,7 +63,7 @@ public class AdminUserAdminController {
 	 * @param roleIds:角色
 	 * @return
 	 */
-
+	@RequiresPermissions("admin_user:add")
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
 	public Result<String> add(String username, String password, String avatar, Integer[] roleIds) {
@@ -73,7 +74,7 @@ public class AdminUserAdminController {
 		return new Result<>(true, "添加用户成功");
 	}
 
-
+	@RequiresPermissions("admin_user:edit")
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String edit(Model model, Integer id) {
 		AdminUser adminUser = adminUserService.getById(id);
@@ -98,7 +99,7 @@ public class AdminUserAdminController {
 	 * @param roleIds:角色
 	 * @return
 			 */
-
+	@RequiresPermissions("admin_user:edit")
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody
 	public Result<Map<String, Object>> edit(Integer id, String password, String avatar, Integer[] roleIds) {
@@ -109,7 +110,7 @@ public class AdminUserAdminController {
 		return new Result<Map<String,Object>>(true, map);
 	}
 
-
+	@RequiresPermissions("admin_user:delete")
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(Integer id) {
 		adminUserService.removeById(id);

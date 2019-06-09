@@ -18,8 +18,10 @@
     <jsp:include page="../components/head.jsp"></jsp:include>
     <div class="row">
         <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-heading"><a href="/">主页</a> / ${user.userName}关注的话题</div>
+            <div class="panel panel-default" style="min-height: 500px">
+                <div class="panel-heading"><a href="/">主页</a>
+                <a href="" style="white"> /&nbsp;${user.userName}关注的话题</a>
+                </div>
                 <div class="panel-body paginate-bot">
 
                     <c:forEach var="item" items="${page.list}">
@@ -43,9 +45,11 @@
                                             <span class="label label-primary">精华</span>
                                             <span>•</span>
                                         </c:if>
+                                        <%--<span><a href="/node/${item.nodeSlug}" class="node">${item.nodeTitle}</a></span>--%>
+                                        <%--<span>•</span>--%>
                                         <strong><a href="/user/${item.author}">${item.author}</a></strong>
                                         <span class="hidden-sm hidden-xs">•</span>
-                                        <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>
+                                        <span class="hidden-sm hidden-xs">${item.viewCount}次浏览</span>
                                         <span>•</span>
                                         <span><fmt:formatDate type="date" value="${item.createDate}"/></span>
                                     </p>

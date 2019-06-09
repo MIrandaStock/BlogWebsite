@@ -39,6 +39,8 @@
         <result column="post_good_count" jdbcType="INTEGER" property="postGoodCount"/>
         <result column="post_bad_count" jdbcType="INTEGER" property="postBadCount"/>
         <result column="status_cd" jdbcType="VARCHAR" property="statusCd"/>
+        <result column="node_slug" jdbcType="VARCHAR" property="nodeSlug"/>
+        <result column="node_title" jdbcType="VARCHAR" property="nodeTitle"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
@@ -46,7 +48,7 @@
     <sql id="Base_Column_List">
         a.topic_id, a.ptab,a.tab,a.title,a.tag,a.content,excerpt, a.create_date, a.update_date, a.last_reply_time, a.last_reply_author, 
         a.view_count,a.author,a.top,a.good,a.show_status,a.reply_count,a.is_delete,a.tag_is_count,a.post_good_count,a.post_bad_count,
-        a.status_cd,a.remark,a.avatar,a.url
+        a.status_cd,a.node_slug,a.node_title,a.remark,a.avatar,a.url
     </sql>
 	<!-- 查询收藏话题 -->
 	<select id="selectAllByCollect" resultType="Topic">

@@ -7214,12 +7214,13 @@ button.close {
 }
 
 #container{
-    position: absolute;
+    position: relative;
     left:0;
     right:0;
-    bottom:0;
+    bottom: 0;
     background-color: rgba(182, 18, 18, 0.884);
     color:white;
     clear:both;
+    padding-bottom:17px;
 }
 /*# sourceMappingURL=bootstrap.min.css.map */

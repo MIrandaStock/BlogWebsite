@@ -1,11 +1,11 @@
 package cn.roothub.service;
 
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import cn.roothub.dto.PageDataBody;
 import cn.roothub.dto.UserExecution;
 import cn.roothub.entity.User;
-
-import javax.servlet.http.HttpServletRequest;
-
+import cn.roothub.entity.Top100;
 
 /**
  * RootUserService
@@ -47,6 +47,7 @@ public interface UserService {
 	
 	/**
 	 * 通过昵称和密码查找用户
+	 * @param UserName
 	 * @param password
 	 * @return
 	 */
@@ -60,7 +61,12 @@ public interface UserService {
 	 */
 	User findByEmailAndPassword(String email, String password);
 	
-
+	/**
+	 * 积分榜用户
+	 * @param limit
+	 * @return
+	 */
+	List<Top100> scores(Integer limit);
 	
 	/**
 	 * 更新积分

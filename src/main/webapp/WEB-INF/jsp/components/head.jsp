@@ -22,9 +22,9 @@
 <nav class="navbar navbar-default"
      style="border-radius: 0; ">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header" style="height: 60px;width: 160px;">
             <a class="navbar-brand" style="font-weight: 700; font-size: 27px;" href="/">
-                <img src="../resources/images/logoblog.png">
+                <img src="/resources/images/logoblog.png">
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse header-navbar">
@@ -39,9 +39,9 @@
                 <li class="hidden-xs" id="shouye">
                     <a href="/">首页</a>
                 </li>
-                <li id="biaoqian">
-                    <a href="/tags">标签</a>
-                </li>
+                <%--<li id="biaoqian">--%>
+                    <%--<a href="/tags">标签</a>--%>
+                <%--</li>--%>
                 <li id="loginli" style="display:none">
                     <a href="/login">登录</a>
                 </li>

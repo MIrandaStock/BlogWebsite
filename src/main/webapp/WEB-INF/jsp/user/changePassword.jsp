@@ -13,6 +13,7 @@
 <body>
 <div class="wrapper">
 <jsp:include page="../components/head.jsp"></jsp:include>
+  <div class="row" style="margin-left:80px;margin-top: 40px;height: 265px;margin-bottom: 30px ">
   <div class="col-md-3 hidden-sm hidden-xs">
 <div class="panel panel-default">
   <div class="list-group">
@@ -25,12 +26,13 @@
 </div>
   </div>
 
-  <div class="col-md-9">
+  <div class="col-md-9" style="min-height: 400px">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <a href="/">主页</a> / 修改密码
+        <a href="/">主页</a>
+        <a href="" style="color: white"> / &nbsp;修改密码</a>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" >
         <form id="form">
           <div class="form-group">
             <label for="oldPassword">旧密码</label>

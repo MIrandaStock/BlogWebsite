@@ -1,9 +1,8 @@
 package cn.roothub.web.admin;
 
-import cn.roothub.dto.PageDataBody;
-import cn.roothub.dto.Result;
-import cn.roothub.entity.Reply;
-import cn.roothub.service.ReplyService;
+import java.util.Date;
+import java.util.Map;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Date;
-import java.util.Map;
+import cn.roothub.dto.PageDataBody;
+import cn.roothub.dto.Result;
+import cn.roothub.entity.Reply;
+import cn.roothub.service.ReplyService;
 
 /**
  * <p></p>
@@ -38,7 +38,7 @@ public class ReplyAdminController {
 	 * @param model
 	 * @return
 	 */
-
+	@RequiresPermissions("reply:list")
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String list(@RequestParam(value = "author",required = false) String author,
 					   @RequestParam(value = "topic",required = false) String topic,
@@ -65,7 +65,7 @@ public class ReplyAdminController {
 	 * @param model
 	 * @return
 	 */
-
+	@RequiresPermissions("reply:edit")
 	@RequestMapping(value = "/edit",method = RequestMethod.GET)
 	public String edit(@RequestParam(value = "id") Integer id,Model model) {
 		Reply reply = replyService.findById(id);
@@ -80,7 +80,7 @@ public class ReplyAdminController {
 	 * @param content: 评论内容
 	 * @return
 	 */
-
+	@RequiresPermissions("reply:edit")
 	@RequestMapping(value = "/edit",method = RequestMethod.POST)
 	@ResponseBody
 	public Result<String> edit(@RequestParam(value = "id") Integer id,
@@ -97,7 +97,7 @@ public class ReplyAdminController {
 	 * @param id: 评论ID
 	 * @return
 	 */
-
+	@RequiresPermissions("reply:delete")
 	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	@ResponseBody
 	public Result<String> delete(@RequestParam(value = "id") Integer id){

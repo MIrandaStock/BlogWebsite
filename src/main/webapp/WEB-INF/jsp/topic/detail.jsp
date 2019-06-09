@@ -23,10 +23,10 @@
 						<div class="media">
 							<div class="media-body">
 								<a href="/">主页</a>
-								<%--<c:if test="${topic.nodeTitle != null}">--%>
-									<%--<span class="chevron">&nbsp;›&nbsp;</span>--%>
-									<%--<a href="/n/${topic.nodeTitle}" class="topic-detail-node">${topic.nodeTitle}</a>--%>
-								<%--</c:if>--%>
+								<c:if test="${topic.nodeTitle != null}">
+									<span class="chevron">&nbsp;›&nbsp;</span>
+									<a href="/n/${topic.nodeTitle}" class="topic-detail-node">${topic.nodeTitle}</a>
+								</c:if>
 								<div class="sep10"></div>
 								<c:choose>
                 					<c:when test="${topic.url != null}">
@@ -37,16 +37,8 @@
                 				</c:otherwise>
               				</c:choose>
 								<p>
-									<div id="topic_${topic.topicId}_votes" class="votes">
-										<a href="javascript:" onclick="voteTopic(${topic.topicId},true);"
-										class="vote vote_up" title="0 赞同">
-										<li class="fa fa-chevron-up"></li>
-									</a> <a href="javascript:"
-									onclick="voteTopic(${topic.topicId},false);" class="vote vote_down" title="0 反对">
-									<li class="fa fa-chevron-down"></li>
-								</a>
-							</div>
-							<span>•</span>
+
+
 							<c:if test="${topic.top}">
 							<span class="label label-primary">置顶</span>
 							<span>•</span>
@@ -61,12 +53,11 @@
 					<%-- <span>${baseEntity.formatDate(topic.createDate)}</span> --%>
 					<%-- <span class="formate-date">${topic.createDate}</span> --%>
 					<span>•</span>
-					<span>${topic.viewCount}次点击</span>
+					<span>${topic.viewCount}次浏览</span>
 				</p>
 			</div>
 			<div class="media-right">
-				<img src="${topic.avatar}"
-				class="avatar-lg img-circle">
+
 			</div>
 		</div>
 	</div>
@@ -133,10 +124,12 @@
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/wangEditor/wangEditor.min.js"></script>
+<script src="/resources/js/goTop.js"></script>
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
 <script src="/resources/js/login_info.js"></script>
 <script src="/resources/js/formatDate.js"></script>
+<script src="/resources/js/topic/detail.js"></script>
 <script src="/resources/js/topic/other-topic.js"></script>
 <script type="text/javascript">
 	/* 获取登录信息 */
@@ -332,26 +325,10 @@
 	 }
 	 upCount();
 	 downCount();
-	 function voteTopic(tid,action){
-	 	$.ajax({
-	 		url:"/topic/vote",
-	 		type:"get",
-	 		dataType:"json",
-	 		data:{
-	 			tid:tid,
-	 			vote:action
-	 		},
-	 		success:function(data){
-	 			if(data.success != null && data.success == true){
-	 				upCount();
-	 				downCount();
-	 			}
-	 		},
-	 		error:function(data){
 
-	 		}
-	 	});
-	 }
+
+
+
 	</script>
 </body>
 </html>

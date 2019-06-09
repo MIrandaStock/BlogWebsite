@@ -32,7 +32,7 @@
               </c:if>
             </div>
           </div>
-
+          
           <div class="data-info d-flex item-tiling">
     <dl class="text-center" title="${countTopic}">
         <dt><a href="/user/${user.userName}/topics">主题</a></dt>
@@ -61,9 +61,9 @@
             <dt><a href="/collect/topics">收藏：</a></dt>
             <dd title="${countCollect}">${countCollect}</dd>
         </dl>
-    </div>
+    </div> 
     <div class="grade-box clearfix" style="display: flex !important;padding-top: 0px;">
-
+        
         <dl>
             <dt>访问：</dt>
             <dd title="360">13</dd>
@@ -72,7 +72,7 @@
             <dt>入驻：</dt>
             <dd><fmt:formatDate type="date" value="${user.createDate}" /></dd>
         </dl>
-    </div>
+    </div> 
         </div>
       </div>
       <!-- 大屏幕显示 -->

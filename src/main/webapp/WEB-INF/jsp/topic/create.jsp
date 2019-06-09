@@ -17,9 +17,10 @@
     <jsp:include page="../components/head.jsp"></jsp:include>
     <div class="row">
         <div class="col-md-9">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="min-height: 650px">
                 <div class="panel-heading">
-                    <a href="/">主页</a> / 发布话题
+                    <a href="/">主页</a>
+                    <a href="" style="color: white"> /&nbsp; 发布话题</a>
                 </div>
                 <div class="panel-body">
                     <form id="form">
@@ -34,23 +35,27 @@
                                     href="javascript:cancelReply();">取消</a></p>
                             <div id="editor" style="margin-bottom: 10px;"></div>
                         </div>
-                        <%--<c:if test="${fn:length(node) == 0}">--%>
-                            <%--<div class="form-group">--%>
-                                <%--<label for="node">节点</label>--%>
-                                <%--<select id="node" class="form-control" name="node">--%>
-                                    <%--<c:forEach var="item" items="${nodeList}" varStatus="status">--%>
-                                        <%--<option value="${item.nodeTitle}">${item.nodeTitle}</option>--%>
-                                    <%--</c:forEach>--%>
-                                <%--</select>--%>
-                            <%--</div>--%>
-                        <%--</c:if>--%>
-                        <div class="form-group">
+                        <c:if test="${fn:length(node) == 0}">
                             <div class="form-group">
-                                <label for="title">标签</label>
-                                <input type="text" class="form-control" id="tag" name="title"
-                                       placeholder="请为你的主题选择一个标签。恰当的归类会让你发布的信息更加有用">
+                                <label for="node">节点</label>
+                                <select id="node" class="form-control" name="node">
+                                    <c:forEach var="item" items="${nodeList}" varStatus="status">
+                                        <option value="${item.nodeTitle}">${item.nodeTitle}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
-                        </div>
+                        </c:if>
+
+
+                        <%--<div class="form-group">--%>
+                            <%--<div class="form-group">--%>
+                                <%--<label for="title">标签</label>--%>
+                                <%--<input type="text" class="form-control" id="tag" name="title"--%>
+                                       <%--placeholder="请为你的主题选择一个标签。恰当的归类会让你发布的信息更加有用">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+
+
                         <button type="button" id="btn" class="btn btn-default">发布</button>
                     </form>
                 </div>
@@ -58,14 +63,13 @@
         </div>
         <div class="col-md-3 hidden-sm hidden-xs">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <b>话题发布指南</b>
+                <div class="panel-heading" style="color: white">
+                    <b>注意事项</b>
                 </div>
                 <div class="panel-body">
-                    <p>• 在标题中描述内容要点。如果一件事情在标题的长度内就已经可以说清楚，那就没有必要写正文了。</p>
-                    <p>• 保持对陌生人的友善。用知识去帮助别人。</p>
-                    <p>• 如果是转载的文章，请务必只填上原文的URL，内容就不用复制过来了。</p>
-                    <p>• 请为你的主题选择一个节点。恰当的归类会让你发布的信息更加有用。</p>
+                    <p>• 尊重作者著作权，转载注明出处</p>
+                    <p>• 拒绝喷子，管理员有权拉黑用户</p>
+
                 </div>
             </div>
         </div>
@@ -76,6 +80,7 @@
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
 <script src="/resources/wangEditor/wangEditor.min.js"></script>
+<!-- <script src="/resources/js/topic/node.js"></script> -->
 <script type="text/javascript">
     $(function () {
         var E = window.wangEditor;
@@ -121,10 +126,10 @@
             // 普通格式的内容
             var contentText = editor.txt.text();
 
-            <%--var node = "${node}";--%>
+            var node = "${node}";
 
             // 节点
-            // var nodeTitle = node ? node : $("#node option:selected").val();
+            var nodeTitle = node ? node : $("#node option:selected").val();
             // 标签
             var tag = $("#tag").val();
             // var avatar = $("#editor").find("img:first").attr("src");
@@ -144,7 +149,7 @@
                     data: {
                         title: title,
                         content: contentHtml,
-                        // nodeTitle: nodeTitle,
+                        nodeTitle: nodeTitle,
                         tag: tag
                     },
                     success: function (data) {

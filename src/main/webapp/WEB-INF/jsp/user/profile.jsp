@@ -8,11 +8,14 @@
     <!-- 引入 Bootstrap -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/app.css" rel="stylesheet" type="text/css">
+    <!-- 引入layui.css -->
+    <link rel="stylesheet" href="/resources/layui/css/layui.css" media="all">
     <link rel="shortcut icon" href="/resources/images/favicon.ico">
 </head>
 <body>
 <div class="wrapper">
     <jsp:include page="../components/head.jsp"></jsp:include>
+    <div class="row" style="margin-left:80px;margin-top: 40px;height: 500px;margin-bottom: 30px ">
     <div class="col-md-3 hidden-sm hidden-xs">
         <div class="panel panel-default">
             <div class="list-group">
@@ -64,6 +67,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <script>
     function updateUserProfile() {

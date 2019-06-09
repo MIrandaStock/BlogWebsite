@@ -22,7 +22,7 @@
 					</div>\
 					</div>\
 					<div style="margin-top: 15px;">\
-					<a href="/topic/create" style="font-size: 14px;"><button class="btn btn-success">发布话题</button></a>\
+					<a href="/topic/create" style="font-size: 14px;"><button class="btn btn-success" style="background-color: darkred">发布话题</button></a>\
 					</div>\
 					</div>\
 					<div class="sep10" style="height: 10px;"></div>\
@@ -34,12 +34,7 @@
 					</tr>\
 					</tbody></table>\
 					</div>\
-					<div class="panel-footer" style="background-color: white">\
-					<div class="row">\
-					<span class="col-md-6"><a href="/notification/list"><span id="n_count">'+data.data.countNotReadNotice+'</span> 条未读消息</a></span>\
-					<span class="col-md-6 text-right">积分：<a href="/top100">'+data.data.countScore+'</a></span>\
-					</div>\
-					</div>\
+					\
 					');
 			}else{
 				$(".col-md-3 #session").append(data.data.intro);

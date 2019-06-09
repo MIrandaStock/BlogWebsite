@@ -154,6 +154,7 @@ function topicList(pageNumber) {
                         </div>\
                         <div class=\"tip\">\
                         <p>\
+                        \
                         <a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
                         <span class=\"hidden-sm hidden-xs\">•</span>\
                         <span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\
@@ -163,8 +164,8 @@ function topicList(pageNumber) {
                         </div>\
                         </div>\
                         <div class=\"media-right\"><span class=\"badge badge-default\"><a href=\"/topic/" + data.data.list[i].topicId + "\">" + data.data.list[i].replyCount + "</a></span></div>\
-                        <div class=\"media-right\"><button onclick='deleteTopic(" + data.data.list[i].topicId + ")'>Delete</button>\
-                        <a href='/api/user/editTopic?id="+data.data.list[i].topicId+"' style='color: #0C0C0C;'>Editor</a>\
+                        <div class=\"media-right\"><button onclick='deleteTopic(" + data.data.list[i].topicId + ")' class=\"btn btn-xs btn-warning\" style='background-color: darkred'>删除</button>\
+                        <a href='/api/user/editTopic?id="+data.data.list[i].topicId+"' class=\"btn btn-xs btn-warning\" tyle='background-color: darkgreen'>编辑</a>\
                         </div>\
                         </div>");
                 }
@@ -315,7 +316,7 @@ function followList(pageNumber) {
 					<p>\
 					<a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
 					<span class=\"hidden-sm hidden-xs\">•</span>\
-					<span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\
+					<span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次浏览</span>\
 					<span>•</span>\
 					<span>" + formatDate(Date.parse(data.data.list[i].createDate)) + "</span>\
 					</p>\
@@ -372,7 +373,7 @@ function fansList(pageNumber) {
                             $(".fans-ul").append("\
 								<li data-v-dc1504f6=\"\" class=\"item\">\
 								<div data-v-dc1504f6=\"\" itemscope=\"itemscope\" itemtype=\"http://schema.org/Person\" class=\"user\">\
-								<a data-v-dc1504f6=\"\" href=\"/user/" + data.data.list[i].userName + "\" \
+								<div data-v-dc1504f6=\"\"  \
 								class=\"link\">\
 								<div class=\"media-left\">\
 								<img src=\"" + data.data.list[i].avatar + "\" class=\"avatar img-circle\" alt=\"\">\
@@ -381,7 +382,7 @@ function fansList(pageNumber) {
 								<div data-v-dc1504f6=\"\" class=\"username\" title=\"" + data.data.list[i].userId + "\">" + data.data.list[i].userName + "</div>\
 								<div data-v-dc1504f6=\"\" class=\"detail\">" + data.data.list[i].signature + "</div>\
 								</div><button data-v-dc1504f6=\"\" class=\"follow-btn\">已关注</button>\
-								</a>\
+								</div>\
 								</div>\
 								</li>");
                         } else if (data2.success != null && data2.success == false && data2.error == "同一用户") {
@@ -434,6 +435,53 @@ function fansList(pageNumber) {
     });
 }
 
+// /*提问*/
+// function topicQnaList(pageNumber) {
+//     $(".cell_tabs a").removeClass("cell_tab_current");
+//     $(".cell_tabs a").addClass("cell_tab");
+//     $(".cell_tabs a").eq(5).removeClass("cell_tab");
+//     $(".cell_tabs a").eq(5).addClass("cell_tab_current");
+//     $.ajax({
+//         url: "/api/user/topic/qna",
+//         type: "get",
+//         dataType: "json",
+//         data: {
+//             name: authorName,
+//             p: pageNumber
+//         },
+//         success: function (data) {
+//             $(".itemList").html('');
+//             for (var i = 0; i < data.data.list.length; i++) {
+//                 $(".itemList").append("<div class=\"panel-body paginate-bot\" style=\"border-bottom: 1px solid #e2e2e2;\">\
+// 					<div class=\"media\">\
+// 					<div class=\"media-body\">\
+// 					<div class=\"title\"><a href=\"/topic/" + data.data.list[i].topicId + "\"> " + data.data.list[i].title + " </a></div>\
+// 					<div class=\"tip\">\
+// 					<p>\
+// 					<span><a href=\"/n/" + data.data.list[i].nodeTitle + "\" class=\"node\">" + data.data.list[i].nodeTitle + "</a></span>\
+// 					<span>•</span>\
+// 					<a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
+// 					<span class=\"hidden-sm hidden-xs\">•</span>\
+// 					<span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\
+// 					<span>•</span>\
+// 					<span>" + formatDate(Date.parse(data.data.list[i].createDate)) + "</span>\
+// 					</p>\
+// 					</div>\
+// 					</div>\
+// 					<div class=\"media-right\"><span class=\"badge badge-default\"><a href=\"/topic/" + data.data.list[i].topicId + "\">" + data.data.list[i].replyCount + "</a></span></div>\
+// 					</div>\
+// 					</div>");
+//             }
+//             $(".itemList").append("<div class=\"panel-footer\" id=\"paginate\"></div>");
+//             paginate(data.data.totalRow, data.data.pageSize, pageNumber, "#");
+//         },
+//         error: function (data) {
+//
+//         }
+//     });
+// }
+
+
 // 被屏蔽
 function shield(pageNumber){
     $(".cell_tabs a").removeClass("cell_tab_current");
@@ -457,6 +505,8 @@ function shield(pageNumber){
 					<div class=\"title\"><a href=\"/topic/" + data.data.list[i].topicId + "\"> " + data.data.list[i].title + " </a></div>\
 					<div class=\"tip\">\
 					<p>\
+					<span><a href=\"/n/" + data.data.list[i].nodeTitle + "\" class=\"node\">" + data.data.list[i].nodeTitle + "</a></span>\
+					<span>•</span>\
 					<a href=\"/user/" + data.data.list[i].author + "\" class=\"author_name\">" + data.data.list[i].author + "</a>\
 					<span class=\"hidden-sm hidden-xs\">•</span>\
 					<span class=\"hidden-sm hidden-xs\">" + data.data.list[i].viewCount + "次点击</span>\

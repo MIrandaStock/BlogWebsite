@@ -1,20 +1,9 @@
 package cn.roothub.service.impl;
 
-import cn.roothub.dao.UserDao;
-import cn.roothub.dto.PageDataBody;
-import cn.roothub.dto.UserExecution;
-import cn.roothub.entity.User;
-import cn.roothub.enums.InsertUserEnum;
-import cn.roothub.enums.UpdateUserEnum;
-import cn.roothub.exception.OperationFailedException;
-import cn.roothub.exception.OperationRepeaException;
-import cn.roothub.exception.OperationSystemException;
-import cn.roothub.service.*;
-import cn.roothub.store.StorageService;
-import cn.roothub.util.CookieAndSessionUtil;
-import cn.roothub.util.JsonUtil;
-import cn.roothub.util.StringUtil;
-import cn.roothub.util.bcrypt.BCryptPasswordEncoder;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +12,26 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import java.nio.file.Paths;
-import java.util.Date;
-import java.util.List;
+import cn.roothub.dao.UserDao;
+import cn.roothub.dto.PageDataBody;
+import cn.roothub.dto.UserExecution;
+import cn.roothub.entity.User;
+import cn.roothub.entity.Top100;
+import cn.roothub.enums.InsertUserEnum;
+import cn.roothub.enums.UpdateUserEnum;
+import cn.roothub.exception.OperationFailedException;
+import cn.roothub.exception.OperationRepeaException;
+import cn.roothub.exception.OperationSystemException;
+import cn.roothub.service.CollectService;
+import cn.roothub.service.NoticeService;
+import cn.roothub.service.ReplyService;
+import cn.roothub.service.TopicService;
+import cn.roothub.service.UserService;
+import cn.roothub.store.StorageService;
+import cn.roothub.util.CookieAndSessionUtil;
+import cn.roothub.util.JsonUtil;
+import cn.roothub.util.StringUtil;
+import cn.roothub.util.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -102,6 +106,13 @@ public class UserServiceImpl implements UserService{
 		return rootUserDao.selectByEmailAndPassword(email, password);
 	}
 
+	/**
+	 * 积分榜用户
+	 */
+	@Override
+	public List<Top100> scores(Integer limit) {
+		return rootUserDao.selectByScore(limit);
+	}
 
 	/**
 	 * 分页查询所有用户，倒叙
@@ -129,8 +140,8 @@ public class UserServiceImpl implements UserService{
 					throw new OperationFailedException("修改失败");
 				}else {
 					//更新redis
-//					ValueOperations<String, String> opsForValue = stringRedisTemplate.opsForValue();
-//					opsForValue.set(rootUser.getThirdAccessToken(), JsonUtil.objectToJson(rootUser));
+					ValueOperations<String, String> opsForValue = stringRedisTemplate.opsForValue();
+					opsForValue.set(rootUser.getThirdAccessToken(), JsonUtil.objectToJson(rootUser));
 					return new UserExecution(user.getUserName(),UpdateUserEnum.SUCCESS,rootUser);
 				}
 			}
@@ -140,7 +151,7 @@ public class UserServiceImpl implements UserService{
 			throw e2;
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
-			throw new OperationSystemException("update RootUser error "+e.getMessage());
+			throw new OperationSystemException("update RootUser erroe "+e.getMessage());
 		}
 	}
 

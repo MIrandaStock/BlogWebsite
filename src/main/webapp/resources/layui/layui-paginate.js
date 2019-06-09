@@ -10,7 +10,7 @@ function paginate(count,limit,page,url){
 		    curr: page,
 		    //skin: 'molv', //加载内置皮肤，也可以直接赋值16进制颜色值，如:#c00
 		    groups:5,//连续显示分页数
-		    theme:'#337ab7',//自定义主题。支持传入：颜色值
+		    theme:'#rgba(182, 18, 18, 0.884)',//自定义主题。支持传入：颜色值
 		    skip: true, //是否开启跳页
 		    prev: '<', //若不显示，设置false即可
 		    next: '>', //若不显示，设置false即可

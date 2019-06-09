@@ -1,12 +1,6 @@
 package cn.roothub.web.admin;
 
-import cn.roothub.dto.PageDataBody;
-import cn.roothub.dto.Result;
-import cn.roothub.entity.Role;
-import cn.roothub.exception.ApiAssert;
-import cn.roothub.service.PermissionService;
-import cn.roothub.service.RoleService;
-import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.alibaba.fastjson.JSON;
+import cn.roothub.dto.PageDataBody;
+import cn.roothub.dto.Result;
+import cn.roothub.entity.Role;
+import cn.roothub.exception.ApiAssert;
+import cn.roothub.service.PermissionService;
+import cn.roothub.service.RoleService;
 
 /**
  * <p></p>
@@ -30,7 +31,7 @@ public class RoleAdminController {
 	@Autowired
 	private PermissionService permissionService;
 	
-
+	@RequiresPermissions("role:list")
 	@RequestMapping(value = "/list")
 	public String list(@RequestParam(value = "p",defaultValue = "1") Integer p,Model model) {
 		PageDataBody<Role> page = roleService.page(p, 25);
@@ -39,14 +40,14 @@ public class RoleAdminController {
 		return "admin/role/list";
 	}
 	
-
+	@RequiresPermissions("role:add")
 	@RequestMapping(value = "/add",method = RequestMethod.GET)
 	public String add(Model model) {
 		model.addAttribute("permissionMap", permissionService.permissionMap());
 		return "admin/role/add";
 	}
 	
-
+	@RequiresPermissions("role:add")
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
 	@ResponseBody
 	public Result<String> add(String roleName,Integer[] permissionIds) {
@@ -61,7 +62,7 @@ public class RoleAdminController {
 	 * @param model
 	 * @return
 	 */
-
+	@RequiresPermissions("role:edit")
 	@RequestMapping(value = "/edit",method = RequestMethod.GET)
 	public String edit(@RequestParam(value = "id",defaultValue = "1") Integer id,Model model) {
 		model.addAttribute("role", roleService.getById(id));
@@ -69,7 +70,8 @@ public class RoleAdminController {
 		model.addAttribute("permissionMap", permissionService.permissionMap());
 		return "admin/role/edit";
 	}
-
+	
+	@RequiresPermissions("role:edit")
 	@RequestMapping(value = "/edit",method = RequestMethod.POST)
 	@ResponseBody
 	public Result<String> edit(Integer roleId,String roleName,Integer[] permissionIds){
@@ -79,7 +81,7 @@ public class RoleAdminController {
 		return new Result<>(true, "编辑成功");
 	}
 	
-
+	@RequiresPermissions("role:delete")
 	@RequestMapping(value = "/delete",method = RequestMethod.GET)
 	public String delete(Integer id) {
 		ApiAssert.notNull(id, "角色ID不能为空");

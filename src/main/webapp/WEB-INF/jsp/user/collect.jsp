@@ -16,10 +16,10 @@
 <body>
   <div class="wrapper">
     <jsp:include page="../components/head.jsp"></jsp:include>
-    <div class="row">
+    <div class="row" >
       <div class="col-md-9">
-        <div class="panel panel-default">
-          <div class="panel-heading"><a href="/" style="color: #778087;">主页</a><span class="chevron">&nbsp;›&nbsp;</span>收藏系统
+        <div class="panel panel-default" style="min-height: 500px;">
+          <div class="panel-heading"><a href="/" style="color: white;">主页</a><span class="chevron" style="color:white;">&nbsp;›&nbsp;</span><a href="" style="color: white;">收藏</a>
           	<span class="pull-right">总共收藏话题 ${countCollect}</span>
           </div>
      		        <div class="panel-body paginate-bot">
@@ -45,11 +45,21 @@
 			  	<c:if test="${item.good}">
 			  	<span class="label label-primary">精华</span> <span>•</span>
 			  	</c:if>
+			  	<span><a href="/node/${item.nodeSlug}" class="node">${item.nodeTitle}</a></span>
+			    <span>•</span>
                 <strong><a href="/user/${item.author}">${item.author}</a></strong>
                 <span class="hidden-sm hidden-xs">•</span>
                 <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>
+                <!-- <span class="hidden-sm hidden-xs">•</span> -->
+                <%-- <span class="hidden-sm hidden-xs"><a href="/topic/${item.topicId}">${item.replyCount}个评论</a></span> --%>
                 <span>•</span>
                 <span><fmt:formatDate type="date" value="${item.createDate}" /></span>
+                  <%-- <c:if test="${item.lastReplyAuthor != null}">
+                  <span>•</span>
+                  <span>最后回复来自 <a href="/user/${item.lastReplyAuthor}">${item.lastReplyAuthor}</a></span>
+                  </c:if> --%>
+                  <!-- <span>•</span> -->
+                  <%-- <a href="/topic/tag/${item.tag}"><span class="label label-success">${item.tag}</span></a> --%>
                 </p>
                 </div>
               </div>

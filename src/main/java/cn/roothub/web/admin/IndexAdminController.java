@@ -2,10 +2,8 @@ package cn.roothub.web.admin;
 
 import cn.roothub.dto.Result;
 import cn.roothub.entity.AdminUser;
-import cn.roothub.service.AdminUserService;
-import cn.roothub.service.ReplyService;
-import cn.roothub.service.TopicService;
-import cn.roothub.service.UserService;
+import cn.roothub.service.*;
+import com.sun.management.OperatingSystemMXBean;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -18,7 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+import java.lang.management.ManagementFactory;
+import java.text.DecimalFormat;
 
 /**
  * @author miansen.wang
@@ -36,6 +35,8 @@ public class IndexAdminController {
     private ReplyService replyService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private NodeService nodeService;
 
     // 后台首页
     @RequestMapping(value = "/index", method = RequestMethod.GET)
@@ -46,6 +47,30 @@ public class IndexAdminController {
         model.addAttribute("comment_count", replyService.countToday());
         // 查询当天新增用户
         model.addAttribute("user_count", userService.countToday());
+        //查询当天新增节点
+        model.addAttribute("node_count", nodeService.countToday());
+        // 获取操作系统的名字
+        model.addAttribute("os_name", System.getProperty("os.name"));
+        // 内存
+        int kb = 1024;
+        OperatingSystemMXBean osmxb = (OperatingSystemMXBean) ManagementFactory
+                .getOperatingSystemMXBean();
+        // 总的物理内存（G）
+        float totalMemorySize = (float) osmxb.getTotalPhysicalMemorySize() / kb / kb / kb;
+
+        //已使用的物理内存（G）
+        float usedMemory = (float) (osmxb.getTotalPhysicalMemorySize() - osmxb.getFreePhysicalMemorySize()) / kb / kb / kb;
+        // 获取系统cpu负载
+        double systemCpuLoad = osmxb.getSystemCpuLoad();
+        // 获取jvm线程负载
+        double processCpuLoad = osmxb.getProcessCpuLoad();
+
+        DecimalFormat df = new DecimalFormat("0.0");
+        model.addAttribute("totalMemorySize", df.format(totalMemorySize));
+        model.addAttribute("usedMemory", df.format(usedMemory));
+        model.addAttribute("systemCpuLoad", df.format(systemCpuLoad));
+        model.addAttribute("processCpuLoad", df.format(processCpuLoad));
+
         return "/admin/index";
     }
 
@@ -61,11 +86,7 @@ public class IndexAdminController {
 
     // 后台登录处理
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String username, String password, @RequestParam(defaultValue = "0") Boolean rememberMe, Model model, HttpServletRequest request) {
-//        AdminUser adminUser=adminUserService.getByName(username);
-//        ApiAssert.notNull(adminUser, "用户不存在");
-//        ApiAssert.isTrue(new BCryptPasswordEncoder().matches(password, adminUser.getPassword()), "密码不正确");
-
+    public String login(String username, String password, @RequestParam(defaultValue = "0") Boolean rememberMe, Model model) {
         try {
             // 添加用户认证信息
             Subject subject = SecurityUtils.getSubject();
@@ -97,6 +118,6 @@ public class IndexAdminController {
     @ResponseBody
     public Result<AdminUser> getAdminUser() {
         AdminUser user = (AdminUser) SecurityUtils.getSubject().getPrincipal();
-        return new Result<>(true, user);
+        return new Result<AdminUser>(true, user);
     }
 }

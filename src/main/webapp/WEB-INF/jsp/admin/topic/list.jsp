@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../layout/header.jsp" %>
 <!-- 内容主体区域 -->
@@ -40,6 +41,7 @@
                         <th>标题</th>
                         <th>用户</th>
                         <th>状态</th>
+                        <th>节点</th>
                         <th>时间</th>
                         <th>操作</th>
                     </tr>
@@ -52,31 +54,42 @@
                             <td><a href="/user/${topic.author}" target="_blank">${topic.author}</a></td>
                             <td>
                                 <c:if test="${topic.top}">置顶</c:if>
-                                <c:if test="${topic.good}">热文</c:if>
+                                <c:if test="${topic.good}">精华</c:if>
                                 &nbsp;
                             </td>
+                            <td>${topic.nodeTitle}</td>
                             <td><fmt:formatDate type="both" value="${topic.createDate}"/></td>
                             <td>
+                                <shiro:hasPermission name="topic:top">
                                     <button onclick="actionBtn('${topic.topicId}', 'top', this)" class="btn btn-xs btn-primary">
                                         <c:choose>
                                             <c:when test="${topic.top}">取消置顶</c:when>
                                             <c:otherwise>置顶</c:otherwise>
                                         </c:choose>
                                     </button>
+                                </shiro:hasPermission>
+                                <shiro:hasPermission name="topic:good">
                                     <button onclick="actionBtn('${topic.topicId}', 'good', this)" class="btn btn-xs btn-primary">
                                         <c:choose>
-                                            <c:when test="${topic.good}"> 取消热文</c:when>
-                                            <c:otherwise> 设为热文</c:otherwise>
+                                            <c:when test="${topic.good}"> 取消加精</c:when>
+                                            <c:otherwise> 加精</c:otherwise>
                                         </c:choose>
                                     </button>
+                                </shiro:hasPermission>
+                                <%--<shiro:hasPermission name="topic:showStatus">--%>
                                     <button onclick="actionBtn('${topic.topicId}', 'showStatus', this)" class="btn btn-xs btn-primary">
                                         <c:choose>
                                             <c:when test="${topic.showStatus}"> 屏蔽</c:when>
                                             <c:otherwise> 取消屏蔽</c:otherwise>
                                         </c:choose>
                                     </button>
+                                <%--</shiro:hasPermission>--%>
+                                <shiro:hasPermission name="topic:edit">
                                     <a href="/admin/topic/edit?id=${topic.topicId}" class="btn btn-xs btn-warning">编辑</a>
+                                </shiro:hasPermission>
+                                <shiro:hasPermission name="topic:delete">
                                     <button onclick="actionBtn('${topic.topicId}', 'delete', this)" class="btn btn-xs btn-danger">删除</button>
+                                </shiro:hasPermission>
                             </td>
                         </tr>
                     </c:forEach>

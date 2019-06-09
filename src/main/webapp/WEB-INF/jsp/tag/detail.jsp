@@ -44,6 +44,8 @@
         <%-- <div class="excerpt"><span>${item.excerpt}</span></div> --%>
         <div class="tip">
         <p class="gray">
+          <a href="/node/${item.nodeSlug}" class="node">${item.nodeTitle}</a>
+		  <span>•</span>
           <strong><a href="/user/${item.author}">${item.author}</a></strong>
           <span class="hidden-sm hidden-xs">•</span>
           <span class="hidden-sm hidden-xs">${item.viewCount}次点击</span>
@@ -80,7 +82,7 @@
 <jsp:include page="../components/foot.jsp"></jsp:include>
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
-
+<script src="/resources/js/goTop.js"></script>
 <script src="/resources/layui/layui.js"></script>
 <script src="/resources/layui/layui-paginate.js"></script>
 <script src="/resources/js/formatDate.js"></script>

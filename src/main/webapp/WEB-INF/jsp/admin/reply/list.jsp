@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>    
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ include file="../layout/header.jsp"%>
 <!-- 内容主体区域 -->
@@ -54,8 +55,12 @@
               <td><a href="/user/${reply.reply_author_name}" target="_blank">${reply.reply_author_name}</a></td>
               <td><fmt:formatDate type="both" value="${reply.create_date}" /></td>
               <td>
+                  <shiro:hasPermission name="reply:edit">
                   	<a href="/admin/reply/edit?id=${reply.reply_id}" class="btn btn-xs btn-warning">编辑</a>
+                  </shiro:hasPermission>
+                  <shiro:hasPermission name="reply:delete">
                   	<button onclick="actionBtn('${reply.reply_id}', 'delete', this)" class="btn btn-xs btn-danger">删除</button>
+                  </shiro:hasPermission>
               </td>
             </tr>
 			</c:forEach>

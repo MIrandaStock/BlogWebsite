@@ -13,7 +13,7 @@
 <body>
 <div class="wrapper">
     <jsp:include page="../components/head.jsp"></jsp:include>
-    <div class="col-md-3 hidden-sm hidden-xs">
+    <div class="col-md-3 hidden-sm hidden-xs" style="min-height: 450px">
         <div class="panel panel-default">
             <div class="list-group">
                 <a href="/user/settings/profile" class="list-group-item ">个人设置</a>
@@ -25,11 +25,13 @@
 
     <div class="col-md-9">
         <div class="panel panel-default">
-            <div class="panel-heading"><a href="/">主页</a> / 修改头像</div>
+            <div class="panel-heading"><a href="/">主页</a>
+            <a href="" style="color:white;"> / &nbsp;修改头像</a>
+            </div>
             <div class="panel-body">
                 <p>
                     <button class="btn btn-primary" id="choiceAvatarBtn">选择头像</button>
-                    <button class="btn btn-success" id="confirmAvatarBtn">确认头像</button>
+                    <button class="btn btn-success" id="confirmAvatarBtn" style="background-color: #ac2925">确认头像</button>
                     <input type="file" class="hidden" id="newAvatarFile" name="newAvatarFile">
                 </p>
                 <div class="row">

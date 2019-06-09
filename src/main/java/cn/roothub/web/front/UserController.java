@@ -241,7 +241,7 @@ public class UserController extends BaseController{
 			return new Result<>(false,"密码不能为空");
 		}
 		User user = getUser(request);
-		if(new BCryptPasswordEncoder().matches(user.getPassword(),oldPassword)) {
+		if(!user.getPassword().equals(oldPassword)) {
 			return new Result<>(false,"旧密码不正确");
 		}
 		//加密保存
